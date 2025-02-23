@@ -1,0 +1,118 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+    <div class="row">
+        <div class="col-md-6 bg-image">
+
+            <img src="~/media/bglogin.jpg" alt="Imagen de login" class="img-fluid" />
+        </div>
+        <div class="col-md-6">
+            <div class="row"><div class="col space"></div></div>
+            <div class="row">
+                <div class="col spe">
+                <img src="~/media/spe-ecuador_logo-blue_1.png" alt="Logo SPE" style="width:230px"/>
+                </div>
+                <div class="col spe">
+                <img src="~/media/logo-petrobowl rq-2024.png" alt="Logo Petrobowl" style="width:220px"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col spe">
+                    <img src="~/media/LOGO PETROTEST.png" alt="Logo Petrobowl" style="width:250px"/>
+                </div>
+            </div>
+        <div class="row"><div class="col space"></div></div>
+        <div class="row">
+            <div class="col" style="text-align:center">
+                <h1>Iniciar sesión</h1>
+            </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-login" >
+
+                <form method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    @*<label asp-for="Email"></label>*@
+                        <input asp-for="Email" placeholder="Correo" class="form-control" />
+                    <span asp-validation-for="Email"  class="text-danger"></span>
+                </div>
+                 <div class="row"><div class="col" style="height:25px"></div></div>
+                <div class="form-group">
+                    @*<label asp-for="Password"></label>*@
+                    <input asp-for="Password" placeholder="Contraseña" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                    <div class="form-group" style="display:none">
+                    <div class="custom-control custom-checkbox">
+                        <input asp-for="RememberMe" type="checkbox" class="custom-control-input">
+                        <label class="custom-control-label" asp-for="RememberMe" >@Html.DisplayNameFor(m => m.RememberMe)</label>
+                    </div>
+
+                </div>
+                <div class="d-grid gap-1">
+
+                <button type="submit" class="btn-primary">INICIAR</button>
+                </div>
+
+
+            </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+<style>
+    .bg-image {
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        padding: 0;
+        clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .bg-image img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+    }
+
+    .spe{
+        display: flex;
+        align-items: center; 
+        justify-content: center; 
+        height: 170px; 
+    }
+    .spe img{
+
+    }
+
+    .space{
+        height: 50px;
+    }
+
+    form {
+        /*text-align: center;*/
+    }
+
+    button.btn-primary {
+        border-radius: 20px;
+        padding: 10px 20px;
+        margin-top: 15px;
+    }
+
+    .form-login{
+        padding: 0 100px 0 100px;
+        align-content:center;
+        text-align: -webkit-center;
+    }
+</style>

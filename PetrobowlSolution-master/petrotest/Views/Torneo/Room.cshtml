@@ -1,0 +1,447 @@
+﻿@using Application.Models.Authorization;
+@using Domain;
+@using petrotest.Models
+@model int;
+@{
+    var room = ViewBag.Room;
+    var isCompetitor = ViewBag.IsCompetitor;
+    var preguntas = ViewBag.Preguntas as List<Pregunta>;
+}
+
+<h1>@petrotest.Controllers.TorneoController.Rooms.GetValueOrDefault(Model)</h1>
+
+<div class="row">
+    <div class="col-12">
+
+        @if (isCompetitor != 1)
+        {
+
+            <div class="container" style="text-align:center">
+                <div class="d-flex justify-content-center"></div>
+
+                <h1>Seleccione una pregunta</h1>
+
+            </div>
+            <div class="container mt-5" style="text-align:center">
+                <input type="text" placeholder="usuario" id="user" value="Juez" hidden />
+
+                <div class="input-group mb-3">
+                    <input id="message" type="text" class="form-control" placeholder="Seleccione una pregunta" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="btnSend">Enviar Pregunta</button>
+                    </div>
+                </div>
+                <div id="notifications"></div>
+            </div>
+            <button class="btn btn-outline-success" type="button" id="btnCalificar" data-bs-toggle="modal" data-bs-target="#ActualizarEquipo">Calificar Respuesta</button>
+
+
+            <table id="preguntasTable" class="table text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="col-1">Numero</th>
+                        <th scope="col" class="col-2">Pregunta</th>
+                        <th scope="col" class="col-2">Respuesta</th>
+                        <th scope="col" class="col-2">Preguntar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pregunta in preguntas!)
+                    {
+                        <tr>
+                            <td class="align-middle" style="text-align:center">@pregunta.id</td>
+                            <td class="align-middle">@pregunta.Descripcion</td>
+                            <td class="align-middle">@pregunta.Respuestas!.FirstOrDefault()!.Descripcion</td>
+                            <td class="align-middle">
+                                <a class="btn btn-info" title="Preguntar" id="pregunta" data-id="">
+                                    <i class="fas fa-check"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        }
+        else if (isCompetitor == 1)
+        {
+            <div class="container">
+                <div class="row">
+                    <div class="col-8" style="text-align:center">
+                        <h1>Competir</h1>
+                    </div>
+                    <div class="col-4" style="text-align:end">
+                        <img src="~/media/logo@(ViewBag.Competidor.Equipo.Nombre).png" alt="Logo SPE" style="width:100px" />
+                    </div>
+                </div>
+
+
+            </div>
+            <div id="messageDiv" class="row mt-5">
+                <div class="col">
+                    <div id="messages"></div>
+                </div>
+            </div>
+            <div class="row"><div class="col space"></div></div>
+            <div class="row"><div class="col space"></div></div>
+            <div class="container mt-5">
+                <div class="d-flex justify-content-center">
+                    <button id="competitorButton" class="btn btn-danger rounded-circle d-none" style="height: 300px;width: 300px;">
+                        Responder
+                    </button>
+
+                </div>
+
+            </div>
+        }
+        
+    </div>
+</div>
+
+@*Modales*@
+<style>
+    #preguntasTable th {
+        text-align: center;
+    }
+</style>
+
+
+    <div class="modal fade" tabindex="-1" id="ActualizarEquipo">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Califica la respuesta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6 text-center">ESPE</label>
+                    <div class="col-lg-8 fv-row">
+                        <div class="row">
+                            <div class="col d-flex justify-content-end">
+                                <form method="post" asp-action="Sumar" asp-controller="Juez" class="form" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="1" />
+                                    <button class="btn btn-success" title="Mas" type="submit">
+                                        <i class="fas fa-solid fa-plus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col d-flex justify-content-start">
+                                <form method="post" asp-action="Restar" asp-controller="Juez" class="form" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="1" />
+                                    <button class="btn btn-danger" title="Menos" type="submit">
+                                        <i class="fas fa-solid fa-minus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
+                        <hr class="mt-2">
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6 text-center">ESPOCH</label>
+                    <div class="col-lg-8 fv-row">
+                        <div class="row">
+                            <div class="col d-flex justify-content-end">
+                                <form method="post" asp-action="Sumar" asp-controller="Juez" class="form" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="3" />
+                                    <button class="btn btn-success" title="Mas" type="submit">
+                                        <i class="fas fa-solid fa-plus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col d-flex justify-content-start">
+                                <form method="post" asp-action="Restar" asp-controller="Juez" class="form" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="3" />
+                                    <button class="btn btn-danger" title="Menos" type="submit">
+                                        <i class="fas fa-solid fa-minus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <hr class="mt-2">
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6 text-center">EPN</label>
+                    <div class="col-lg-8 fv-row">
+                        <div class="row">
+                            <div class="col d-flex justify-content-end">
+                                <form method="post" asp-action="Sumar" asp-controller="Juez" class="form" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="2" />
+                                    <button class="btn btn-success" title="Mas" type="submit">
+                                        <i class="fas fa-solid fa-plus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col d-flex justify-content-start">
+                                <form method="post" asp-action="Restar" asp-controller="Juez" class="form" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="2" />
+                                    <button class="btn btn-danger" title="Menos" type="submit">
+                                        <i class="fas fa-solid fa-minus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <hr class="mt-2">
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6 text-center">ESPOL</label>
+                    <div class="col-lg-8 fv-row">
+                        <div class="row">
+                            <div class="col d-flex justify-content-end">
+                                <form method="post" asp-action="Sumar" asp-controller="Juez" class="form" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="4" />
+                                    <button class="btn btn-success" title="Mas" type="submit">
+                                        <i class="fas fa-solid fa-plus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col d-flex justify-content-start">
+                                <form method="post" asp-action="Restar" asp-controller="Juez" class="form" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="4" />
+                                    <button class="btn btn-danger" title="Menos" type="submit">
+                                        <i class="fas fa-solid fa-minus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <hr class="mt-2">
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6 text-center">UCE</label>
+                    <div class="col-lg-8 fv-row">
+                        <div class="row">
+                            <div class="col d-flex justify-content-end">
+                                <form method="post" asp-action="Sumar" asp-controller="Juez" class="form" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="5" />
+                                    <button class="btn btn-success" title="Mas" type="submit">
+                                        <i class="fas fa-solid fa-plus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col d-flex justify-content-start">
+                                <form method="post" asp-action="Restar" asp-controller="Juez" class="form" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="5" />
+                                    <button class="btn btn-danger" title="Menos" type="submit">
+                                        <i class="fas fa-solid fa-minus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <hr class="mt-2">
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6 text-center">UPSE</label>
+                    <div class="col-lg-8 fv-row">
+                        <div class="row">
+                            <div class="col d-flex justify-content-end">
+                                <form method="post" asp-action="Sumar" asp-controller="Juez" class="form" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="6" />
+                                    <button class="btn btn-success" title="Mas" type="submit">
+                                        <i class="fas fa-solid fa-plus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col d-flex justify-content-start">
+                                <form method="post" asp-action="Restar" asp-controller="Juez" class="form" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="6" />
+                                    <button class="btn btn-danger" title="Menos" type="submit">
+                                        <i class="fas fa-solid fa-minus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="CompetitorNotificationsModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Competidores que han presionado el botón</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="competitorNotificationsList" class="list-group">
+                        <!-- Aquí se agregarán dinámicamente las notificaciones -->
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="recargarPagina()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@*Script*@
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    var connection = new signalR.HubConnectionBuilder().withUrl("/torneo").build();
+    var isCompetitor = @ViewBag.IsCompetitor;
+
+    connection.start().then(() => {
+        connection.invoke("AddToGroup", "@(ViewBag.Room)")
+    }).catch(() => console.error(e));
+
+    // 2 juez - 1 competidor
+    if (isCompetitor == 2) {
+        document.getElementById("btnSend").addEventListener("click", (event) => {
+            let room = "@ViewBag.Room";
+            let user = document.getElementById("user").value;
+            let message = document.getElementById("message").value;
+
+            location.reload(true);
+
+            connection.invoke("SendMessage", room, user, message)
+                .catch((err) => console.error(err.toString()));
+
+            document.getElementById("message").value = "";
+            document.getElementById("message").focus();
+
+            event.preventDefault();
+
+            
+            });
+            debugger;
+            connection.on("NotifyJudgeOnCompetitorPress", (userName) => {
+            console.log("Competidor que presionó el botón: " + userName);
+            mostrarNotificacionBootstrap(userName);
+
+            connection.invoke("ClearJudgeMessages", "@ViewBag.Room")
+                .catch((err) => console.error(err.toString()));
+        });
+
+        function mostrarNotificacionBootstrap(userName) {
+            // Crea un elemento de notificación en la lista del nuevo modal
+            var listaNotificaciones = document.getElementById("competitorNotificationsList");
+            var notificacion = document.createElement("li");
+            notificacion.className = "list-group-item";
+            notificacion.innerHTML = "<strong>Competidor que presionó el botón:</strong> " + userName;
+
+            // Agrega la notificación a la lista
+            listaNotificaciones.appendChild(notificacion);
+
+            // Muestra el nuevo modal
+            $('#CompetitorNotificationsModal').modal('show');
+        }
+
+        function recargarPagina() {
+            location.reload(true);
+        }
+
+    }
+    else if (isCompetitor == 1) {
+        debugger;
+
+        connection.on("ReceiveMessageToCompetitors", (message) => {
+            var messageContainer = document.getElementById("messages");
+
+            // Borra el mensaje anterior
+            messageContainer.innerHTML = "";
+
+            // Muestra el nuevo mensaje
+            var newMessage = document.createElement("div");
+            newMessage.innerHTML = "<b><h3>" + message + "</b></h3>";
+            messageContainer.appendChild(newMessage);
+
+            document.getElementById("competitorButton").classList.remove("d-none");
+        });
+        connection.on("ReceiveMessage", (user, message) => {
+
+            var messageContainer = document.getElementById("messages");
+
+            messageContainer.innerHTML = "";
+
+            var newMessage = document.createElement("div");
+            newMessage.innerHTML = "<b><h3>" + message + "</b></h3>";
+            messageContainer.appendChild(newMessage);
+            document.getElementById("competitorButton").classList.remove("d-none");
+
+        });
+
+        if (!document.getElementById("competitorButton").classList.contains("d-none")) {
+            document.getElementById("messages").innerHTML = "";
+        }
+
+        connection.on("ShowButtonToCompetitors", () => {
+            if (isCompetitor == 1) {
+                document.getElementById("competitorButton").classList.remove("d-none");
+            }
+        });
+
+
+        document.getElementById("competitorButton").addEventListener("click", function () {
+            this.classList.add("d-none");
+            debugger;
+            let userName = "@(ViewBag.Competidor != null ? $"{ViewBag.Competidor.Equipo.Nombre}_{ViewBag.Competidor.Nombre}_{ViewBag.Competidor.Apellido}" : "")";
+
+
+            connection.invoke("CompetitorPressedButton", "@ViewBag.Room", userName)
+                .catch((err) => console.error(err.toString()));
+        });
+
+        
+    }
+
+        
+</script>
+
+@*Tabla*@
+@section scripts{
+    <script>
+    $(document).ready(function () {
+        $('#preguntasTable').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "info": true,
+            "autoWidth": true,
+            "pageLength": 5,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+        });
+    });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            debugger;
+            const buttons = document.querySelectorAll('[title="Preguntar"]');
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', e => {
+                    let pregunta = button?.parentElement.parentElement?.children[1].textContent;
+                    cambiaValores(pregunta);
+                });
+
+                function cambiaValores(pregunta) {
+                    var inputPregunta = document.getElementById("message");
+
+                    inputPregunta.value = pregunta;
+                }
+            });
+        });
+
+
+</script>
+}
+

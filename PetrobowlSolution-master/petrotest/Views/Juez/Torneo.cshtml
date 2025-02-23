@@ -1,0 +1,95 @@
+﻿@using Domain;
+@model List<Equipo>
+@{
+    ViewData["Title"] = "Torneo";
+}
+@if (Model.Count != 0)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <h1>Sorteo para el torneo</h1>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col d-flex align-items-center justify-content-center">
+                <img src="~/media/logoESPE.png" alt="Logo SPE" style="width:70px" />
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+                <img src="~/media/logoEPN.png" alt="Logo SPE" style="width:70px" />
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+                <img src="~/media/logoESPOCH.png" alt="Logo SPE" style="width:70px" />
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+                <img src="~/media/logoUCE.png" alt="Logo SPE" style="width:70px" />
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+                <img src="~/media/logoUPSE.png" alt="Logo SPE" style="width:70px" />
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+                <img src="~/media/logoESPOL.png" alt="Logo SPE" style="width:150px" />
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col d-flex align-items-center justify-content-center">
+               <h3>El sorteo va a tener como resultado dos grupos el A y el B</h3>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col d-flex align-items-center justify-content-center">
+                <h3>Comenzar Sorteo</h3>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col d-flex align-items-center justify-content-center">
+                <a asp-action="Sortear" asp-controller="Juez" class="btn btn-primary">
+                    Sortear
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+}else
+{
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col d-flex justify-content-center">
+                <h1>Resultado del sorteo</h1>
+            </div>
+        </div>
+        <div class="row"><div class="col space"></div></div>
+        <div class="row mt-5">
+            <div class="col d-flex justify-content-center">
+                <div>
+                    <ul class="list-group">
+                        <li class="list-group-item disabled text-center"><h2>Grupo A</h2></li>
+                        @foreach (var equipo in ViewBag.GrupoA)
+                        {
+                            <li class="list-group-item text-center"><img src="~/media/logo@(equipo.Nombre).png" alt="Logo SPE" style="@(equipo.Nombre == "ESPOL" ? "width: 150px;" : "width: 50px;");" /></li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col d-flex justify-content-center">
+                <div>
+                    <ul class="list-group">
+                        <li class="list-group-item disabled text-center"><h2>Grupo B</h2></li>
+
+                        @foreach (var equipo in ViewBag.GrupoB)
+                        {
+                            <li class="list-group-item text-center"><img src="~/media/logo@(equipo.Nombre).png" alt="Logo SPE" style="@(equipo.Nombre == "ESPOL" ? "width: 150px;" : "width: 50px;");" /></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row"><div class="col space"></div></div>
+
+    </div>
+}
+

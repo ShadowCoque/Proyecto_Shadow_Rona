@@ -1,0 +1,219 @@
+﻿@using Domain;
+@model List<Persona>
+@{
+    ViewData["Title"] = "Equipo";
+}
+@if (ViewBag.capcount != 0)
+{
+    @foreach (var competidor in Model)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-8" style="text-align:center">
+                    <h1>Equipo @Model.FirstOrDefault().Equipo.Nombre</h1>
+                </div>
+                <div class="col-4" style="text-align:end">
+                    <img src="~/media/logo@(Model.FirstOrDefault()?.Equipo.Nombre).png" alt="Logo SPE" style="width:100px" />
+                </div>
+            </div>
+            <div class="row"><div class="col space"></div></div>
+            @if (ViewBag.numEquipo == 4 && ViewBag.reserva != null)
+            {
+                <div class="row justify-content-end">
+                    <div class="col" style="text-align:end; display:none">
+                        <a asp-action="Registrar" asp-controller="Competidor" class="btn btn-primary" disabled>
+                            Agregar
+                        </a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row justify-content-end">
+                    <div class="col" style="text-align:end">
+                        <a asp-action="Registrar" asp-controller="Competidor" class="btn btn-primary">
+                            Agregar
+                        </a>
+                    </div>
+                </div>
+            }
+
+            <div class="row"><div class="col space"></div></div>
+            <div class="row align-items-center">
+                <div class="col d-flex justify-content-center" style="text-align:center">
+                    <div id="capitan">
+                        <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">
+                            @*<a href="@Url.Action("OtraVista", "Controlador", new { competidorId = competidor.id })" class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">*@
+                            @(Model.FirstOrDefault()!.Equipo!.Nombre)_CAP_@(ViewBag.capitan.Nombre)_@(ViewBag.capitan.Apellido)
+                        </a>
+                    </div>
+
+                </div>
+                <div class="col d-flex justify-content-center">
+                    @if (ViewBag.numEquipo == 1 || ViewBag.numEquipo == 2 || ViewBag.numEquipo == 3 || ViewBag.numEquipo == 4)
+                    {
+                        <div id="jugador1">
+                            <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">
+                                @(Model.FirstOrDefault()!.Equipo!.Nombre)_@(ViewBag.equipo[0].Nombre)_@(ViewBag.equipo[0].Apellido)
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="row"><div class="col space"></div></div>
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    @if (ViewBag.numEquipo == 2 || ViewBag.numEquipo == 3 || ViewBag.numEquipo == 4)
+                    {
+                        <div id="jugador2">
+                            <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">
+                                @(Model.FirstOrDefault()!.Equipo!.Nombre)_@(ViewBag.equipo[1].Nombre)_@(ViewBag.equipo[1].Apellido)
+                            </a>
+                        </div>
+                    }
+                </div>
+                <div class="col d-flex justify-content-center ">
+                    @if (ViewBag.numEquipo == 3 || ViewBag.numEquipo == 4)
+                    {
+                        <div id="jugador3">
+                            <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">
+                                @(Model.FirstOrDefault()!.Equipo!.Nombre)_@(ViewBag.equipo[2].Nombre)_@(ViewBag.equipo[2].Apellido)
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="row"><div class="col space"></div></div>
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    @if (ViewBag.numEquipo == 4)
+                    {
+                        <div id="jugador4">
+                            <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">
+                                @(Model.FirstOrDefault()!.Equipo!.Nombre)_@(ViewBag.equipo[3].Nombre)_@(ViewBag.equipo[3].Apellido)
+                            </a>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <div class="row"><div class="col space"></div></div>
+            <div class="row">
+                <div class="col d-flex justify-content-end">
+                    @if (ViewBag.reserva != null)
+                    {
+                        <div id="jugadorReserva">
+                            <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center competidor">
+                                @(Model.FirstOrDefault()!.Equipo!.Nombre)_@(ViewBag.reserva.Nombre)_@(ViewBag.reserva.Apellido)_Reserva
+                            </a>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <div class="row mt-5">
+                <div class="col-12" style="text-align:center">
+                    <h5><b>Nota:</b> Para hacer un cambio, debes contactarte con un juez o con un administrador. </h5>
+                </div>
+            </div>
+        </div>
+    }
+}else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-8" style="text-align:center">
+                <h1>Equipo @(ViewBag.equipo.Nombre) </h1>
+            </div>
+            <div class="col-4" style="text-align:end">
+                <img src="~/media/logo@(ViewBag.equipo.Nombre).png" alt="Logo SPE" style="width:100px" />
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12" style="text-align:center">
+                <h2>Información del competidor </h2>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label fw-semibold fs-6">Nombre</label>
+                <div class="col-lg-8 fv-row">
+                    <input class="form-control bg-transparent" value="@ViewBag.integrante.Nombre" readonly />
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label fw-semibold fs-6">Apellido</label>
+                <div class="col-lg-8 fv-row">
+                    <input class="form-control bg-transparent" value="@ViewBag.integrante.Apellido" readonly />
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label fw-semibold fs-6">Universidad</label>
+                <div class="col-lg-8 fv-row">
+                    <input class="form-control bg-transparent" value="@ViewBag.integrante.Equipo.Universidad" readonly />
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12" style="text-align:center">
+                <h4><b>Nota:</b> Solo los capitanes pueden ver la información de los otros competidores </h4>
+            </div>
+        </div>
+   </div>
+}
+
+
+<style>
+    .btncard{
+        width: 300px;
+        height: 60px;
+    }
+
+    .competidor{
+        color:white;
+    }
+
+    #jugadorReserva{
+        color:white;
+    }
+
+    #jugador1 {
+        color:white;
+    }
+
+    #jugador2 {
+        color:white;
+    }
+
+    #jugador3 {
+        color:white;
+    }
+
+    #jugador4 {
+        color:white;
+    }
+
+    #capitan {
+        color:white;
+    }
+
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const divCapitan = document.getElementById('capitan');
+        const divJugador1 = document.getElementById('jugador1');
+        const divJugador2 = document.getElementById('jugador2');
+        const divJugador3 = document.getElementById('jugador3');
+        const divJugador4 = document.getElementById('jugador4');
+        const divJugadorReserva = document.getElementById('jugadorReserva');
+
+
+    });
+</script>

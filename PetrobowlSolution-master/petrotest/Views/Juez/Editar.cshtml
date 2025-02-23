@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edición de Preguntas</title>
+    <!-- Agrega los enlaces a las bibliotecas de Bootstrap, Font Awesome y jQuery -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 style="text-align: center;">Edición de Preguntas</h1>
+    </div>
+
+    <div class="container">
+        <table class="table text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="col-1">Número</th>
+                    <th scope="col" class="col-4">Pregunta</th>
+                    <th scope="col" class="col-4">Respuesta</th>
+                    <th scope="col" class="col-3">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="align-middle">1</td>
+                    <td class="align-middle">
+                        <!-- Textarea para mostrar y editar la pregunta -->
+                        <textarea id="pregunta" class="form-control" placeholder="Ingrese la pregunta"></textarea>
+                    </td>
+                    <td class="align-middle">
+                        <!-- Textarea para mostrar y editar la respuesta -->
+                        <textarea id="respuesta" class="form-control" placeholder="Ingrese la respuesta"></textarea>
+                    </td>
+                    <td class="align-middle">
+                        <!-- Enlace para guardar la pregunta -->
+                        <a href="#" class="btn btn-warning guardar-btn">
+                            <i class="fas fa-pencil-alt"></i> Guardar Pregunta
+                        </a>
+                    </td>
+                </tr>
+                <!-- Nueva fila para los botones -->
+                <tr>
+                    <td></td> <!-- Celda vacía para alinear con la columna "Número" -->
+                    <td colspan="3">
+                        <!-- colspan="3" para ocupar el espacio de las tres últimas columnas -->
+                        <!-- Enlace para volver a la lista de preguntas -->
+                        <a href="/Preguntas" class="btn btn-primary">
+                            <i class="fa fa-solid fa-eye"></i>
+                            <span>Volver</span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Función para mostrar la pregunta y respuesta en los textarea
+            $(".btn-info").click(function () {
+                var pregunta = $(this).closest("tr").find("td:eq(1)").text();
+                var respuesta = $(this).closest("tr").find("td:eq(2)").text();
+
+                // Asigna el valor de la pregunta al textarea de pregunta
+                $("#pregunta").val(pregunta.trim());
+                $("#respuesta").val(respuesta.trim());
+            });
+
+            // Función para guardar la pregunta editada
+            $(".guardar-btn").click(function () {
+                var preguntaEditada = $("#pregunta").val();
+                var respuestaEditada = $("#respuesta").val();
+
+                // Realiza aquí la lógica para guardar la pregunta editada
+                // Esto podría ser mediante una petición AJAX al servidor
+                // Aquí solo se muestra un ejemplo de alerta
+                alert("Pregunta editada: " + preguntaEditada + "\nRespuesta editada: " + respuestaEditada);
+            });
+        });
+    </script>
+</body>
+</html>

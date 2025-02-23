@@ -1,0 +1,299 @@
+﻿@using Application.Models.Authorization;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Petrotest</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/petrotest.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.css" />
+   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="~/css/sidebar.css" rel="stylesheet" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="~/media/LOGO PETROTEST.png">
+
+</head>
+<body style="margin-bottom: 0">
+    @if (!Context.Request.Path.StartsWithSegments("/Account/Login"))
+    {
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+            <i class="fas fa-bars"></i>
+        </a>
+        
+        <nav id="sidebar" class="sidebar-wrapper">
+                <div class="sidebar-content" style="background-color: #f5f5f5;">
+                <div class="sidebar-brand">
+                        <img src="~/media/spe-ecuador_logo-blue_1.png" alt="Logo SPE" style="width:200px" />
+                    <div id="close-sidebar">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <!-- sidebar-search  -->
+                <div class="sidebar-menu">
+                    <ul>
+
+                            @if (User.IsInRole(Role.Competidor))
+                            {
+                                <li class="header-menu">
+                                    <span>Competidor</span>
+                                </li>
+                                <li>
+                                    <a asp-action="Equipo" asp-controller="Competidor">
+                                        <i class="fa fa-solid fa-users"></i>
+                                        <span>Competidores</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Salas" asp-controller="Torneo">
+                                        <i class="fa fa-solid fa-trophy"></i>
+                                        <span>Competir</span>
+                                    </a>
+                                </li>
+                            }
+                            else if (User.IsInRole(Role.Juez))
+                            {
+                                <li class="header-menu">
+                                    <span>Juez</span>
+                                </li>
+                                <li>
+                                    <a asp-action="Equipos" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-users"></i>
+                                        <span>Equipos</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a asp-action="Torneo" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-cloud"></i>
+                                        <span>Sorteo Torneo</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Start" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-play"></i>
+                                        <span>Comenzar Torneo</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Resultados" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-eye"></i>
+                                        <span>Resultado Global</span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a asp-action="ResultadosA" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-eye"></i>
+                                        <span>Grupo A</span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a asp-action="ResultadosB" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-eye"></i>
+                                        <span>Grupo B</span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a asp-action="Preguntas" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-question"></i>
+                                        <span>Ver Preguntas</span>
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a asp-action="Usuarios" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-user"></i>
+                                        <span>Gestión Usuarios</span>
+                                    </a>
+                                </li>
+                            }
+                            else if (User.IsInRole(Role.Veedor))
+                            {
+                                <li class="header-menu">
+                                    <span>Veedor</span>
+                                </li>
+                                <li>
+                                    <a asp-action="Resultados" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-eye"></i>
+                                        <span>Resultado Global</span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a asp-action="ResultadosA" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-eye"></i>
+                                        <span>Grupo A</span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a asp-action="ResultadosB" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-eye"></i>
+                                        <span>Grupo B</span>
+                                    </a>
+
+                                </li>
+                            }
+                            else if (User.IsInRole(Role.Admin))
+                            {
+                                <li class="header-menu">
+                                    <span>Admnistrador</span>
+                                </li>
+
+                                <li>
+                                    <a asp-action="Usuarios" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-user"></i>
+                                        <span>Gestión Usuarios</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Equipos" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-users"></i>
+                                        <span>Equipos</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a asp-action="Torneo" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-cloud"></i>
+                                        <span>Sorteo Torneo</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Start" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-play"></i>
+                                        <span>Comenzar Torneo</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Resultados" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-eye"></i>
+                                        <span>Resultado Global</span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a asp-action="ResultadosA" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-eye"></i>
+                                        <span>Grupo A</span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a asp-action="ResultadosB" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-eye"></i>
+                                        <span>Grupo B</span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a asp-action="Preguntas" asp-controller="Juez">
+                                        <i class="fa fa-solid fa-question"></i>
+                                        <span>Ver Preguntas</span>
+                                    </a>
+                                </li>
+                            }
+
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <a id="logoutLink">
+                    <i class="fa fa-power-off"></i>    Cerrar Sesión
+                    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm"></form>
+                </a>
+            </div>
+        </nav>
+        <style>
+                .sidebar-menu a {
+                    font-size: 18px;
+                }
+
+                .sidebar-menu i {
+                    font-size: 25px; 
+                }
+        </style>
+        <!-- sidebar-wrapper  -->
+        <main class="page-content">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </main>
+        <!-- page-content" -->
+    </div>
+        }
+    @if (Context.Request.Path.StartsWithSegments("/Account/Login"))
+    {
+        <div class="container-fluid">
+            <main role="main" style="min-height: 100vh;">
+            @RenderBody()
+        </main>
+    </div>
+    }
+@*    @if (!Context.Request.Path.StartsWithSegments("/Account/Login"))
+    {
+        <footer class="border-top footer text-muted">
+            <div class="container">
+            &copy; 2024 - Petrotest
+        </div>
+    </footer>
+    }*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script type="text/javascript">
+        $(".sidebar-dropdown > a").click(function () {
+            $(".sidebar-submenu").slideUp(200);
+            if (
+                $(this)
+                    .parent()
+                    .hasClass("active")
+            ) {
+                $(".sidebar-dropdown").removeClass("active");
+                $(this)
+                    .parent()
+                    .removeClass("active");
+            } else {
+                $(".sidebar-dropdown").removeClass("active");
+                $(this)
+                    .next(".sidebar-submenu")
+                    .slideDown(200);
+                $(this)
+                    .parent()
+                    .addClass("active");
+            }
+        });
+
+        $("#close-sidebar").click(function () {
+            $(".page-wrapper").removeClass("toggled");
+        });
+        $("#show-sidebar").click(function () {
+            $(".page-wrapper").addClass("toggled");
+        });
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#logoutLink').click(function (e) {
+                e.preventDefault();  // Evitar el comportamiento predeterminado del enlace
+                $('#logoutForm').submit();  // Enviar el formulario
+            });
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,117 @@
+﻿@using Domain;
+@model List<Persona>
+@{
+    ViewData["Title"] = "Registrar";
+}
+@foreach (var competidor in Model)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-8" style="text-align:center">
+                <h1>Equipo @Model.FirstOrDefault().Equipo.Nombre</h1>
+            </div>
+            <div class="col-4" style="text-align:end">
+                <img src="~/media/logo@(Model.FirstOrDefault()?.Equipo.Nombre).png" alt="Logo SPE" style="width:100px" />
+            </div>
+        </div>
+        <div class="row"><div class="col space"></div></div>
+        <div class="row">
+            <div class="col">
+                <form asp-action="Registrar" asp-controller="Competidor" method="Post" id="kt_account_profile_details_form" class="form" enctype="multipart/form-data">
+                    <div class="row mb-6 formnew">
+                        <label class="col-lg-4 col-form-label fw-semibold fs-6">Nombres</label>
+                        <div class="col-lg-8 fv-row">
+                            <input type="text" placeholder="Nombre" name="Nombre" autocomplete="off" class="form-control bg-transparent" />
+                            <div id="nombreError" class="error-message"></div>
+                        </div>
+                    </div>
+                    <div class="row mb-6 formnew">
+                        <label class="col-lg-4 col-form-label fw-semibold fs-6">Apellidos</label>
+                        <div class="col-lg-8 fv-row">
+                            <input type="text" placeholder="Apellido" name="Apellido" autocomplete="off" class="form-control bg-transparent" />
+                            <div id="apellidoError" class="error-message">
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row mb-6 formnew">
+                        <label class="col-lg-4 col-form-label fw-semibold fs-6">Email</label>
+                        <div class="col-lg-8 fv-row">
+                            <input type="text" placeholder="Email" name="Email" autocomplete="off" class="form-control bg-transparent" />
+                        </div>
+                    </div>
+                    <div class="row mb-6 formnew">
+                        <label class="col-lg-4 col-form-label fw-semibold fs-6">Contraseña</label>
+                        <div class="col-lg-8 fv-row">
+                            <input id="Password" type="password" placeholder="Contraseña" name="Password" autocomplete="off" class="form-control bg-transparent" />
+                            <div id="passwordError" class="error-message"></div>
+                        </div>
+                    </div>
+                    <div class="row mb-6 formnew">
+                        <label class="col-lg-4 col-form-label fw-semibold fs-6">Reserva</label>
+                        <div class="col-lg-8 fv-row">
+                            <input type="checkbox" class="form-check-input" name="Reserva" id="exampleCheck1" value="true">
+                            <label class="form-check-label" for="exampleCheck1">Si</label>
+                        </div>
+                    </div>
+                    <div style="text-align:end">
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+
+<style>
+    .btncard {
+        width: 300px;
+        height: 60px;
+    }
+
+    .formnew{
+        margin-bottom:15px;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const passwordInput = document.getElementById('Password');
+        const passwordError = document.getElementById('passwordError');
+
+        passwordInput.addEventListener('input', function () {
+            const password = passwordInput.value;
+
+            // Verificar las condiciones de la contraseña
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasNumber = /\d/.test(password);
+            const hasSpecialChar = /[!@@#$%^&*(),.?":{}|<>]/.test(password);
+            const hasMinLength = password.length >= 10;
+            // Mostrar mensajes de error según las condiciones
+            passwordError.innerHTML = '';
+
+            if (!hasUpperCase) {
+                passwordError.innerHTML += 'Debe contener al menos una mayúscula.<br>';
+            }
+
+            if (!hasLowerCase) {
+                passwordError.innerHTML += 'Debe contener al menos una minúscula.<br>';
+            }
+
+            if (!hasNumber) {
+                passwordError.innerHTML += 'Debe contener al menos un número.<br>';
+            }
+
+            if (!hasSpecialChar) {
+                passwordError.innerHTML += 'Debe contener al menos un carácter especial.<br>';
+            }
+            if (!hasMinLength) {
+                passwordError.innerHTML += 'Debe tener al menos 10 caracteres.<br>';
+            }
+        });
+
+    });
+</script>

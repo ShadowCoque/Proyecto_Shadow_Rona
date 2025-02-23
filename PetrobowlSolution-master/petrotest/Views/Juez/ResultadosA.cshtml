@@ -1,0 +1,80 @@
+﻿@model List<Domain.Resultado>
+@{
+    ViewData["Title"] = "Resultados A";
+}
+
+<div class="container mt-5" style="text-align:center">
+    <div class="d-flex justify-content-center"></div>
+    <h1>Resultados Grupo A</h1>
+</div>
+<div class="row">
+    <div class="col space"></div>
+</div>
+
+<div class="container">
+    <table id="usuariosTable" class="table text-center">
+        <thead>
+            <tr>
+                <th scope="col" class="col-1"></th>
+                <th scope="col" class="col-2">Nombre de equipo</th>
+                <th scope="col" class="col-2">Puntos</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var resultado in Model)
+            {
+                <tr>
+                    <td class="align-middle">
+                        @if (resultado.Equipos != null)
+                        {
+                            if (resultado.Equipos.id == 1)
+                            {
+                                <img src="~/media/logoESPE.png" alt="Logo ESPE" style="width:30px" />
+                            }
+                            else if (@resultado.Equipos?.id == 2)
+                            {
+                                <img src="~/media/logoEPN.png" alt="Logo EPN" style="width:30px" />
+                            }
+                            else if (@resultado.Equipos?.id == 3)
+                            {
+                                <img src="~/media/logoESPOCH.png" alt="Logo ESPOCH" style="width:30px" />
+                            }
+                            else if (@resultado.Equipos?.id == 4)
+                            {
+                                <img src="~/media/logoESPOL.png" alt="Logo ESPOL" style="width:100px" />
+                            }
+                            else if (@resultado.Equipos?.id == 5)
+                            {
+                                <img src="~/media/logoUCE.png" alt="Logo UCE" style="width:30px" />
+                            }
+                            else if (@resultado.Equipos?.id == 6)
+                            {
+                                <img src="~/media/logoUPSE.png" alt="Logo UPSE" style="width:30px" />
+                            }
+                        }
+                    </td>
+                    <td class="align-middle">@resultado.Equipos?.Nombre</td>
+                    <td class="align-middle">@resultado.Total</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#usuariosTable').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
+                "info": false,
+                "autoWidth": true,
+                "pageLength": 10,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+            });
+        });
+    </script>
+}

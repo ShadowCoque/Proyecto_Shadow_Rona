@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <h1>Resultado del sorteo</h1>
+        </div>
+    </div>
+    <div class="row"><div class="col space"></div></div>
+    <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+            <div>
+                <ul class="list-group">
+                    <li class="list-group-item disabled text-center"><h2>Grupo A</h2></li>
+                    @foreach (var equipo in ViewBag.GrupoA)
+                    {
+                        <li class="list-group-item text-center"><img src="~/media/logo@(equipo.Nombre).png" alt="Logo SPE" style="@(equipo.Nombre == "ESPOL" ? "width: 150px;" : "width: 50px;");" /></li>
+                    }
+                </ul>
+            </div>
+
+        </div>
+        <div class="col d-flex justify-content-center">
+            <div>
+                <ul class="list-group">
+                    <li class="list-group-item disabled text-center"><h2>Grupo B</h2></li>
+
+                    @foreach (var equipo in ViewBag.GrupoB)
+                    {
+                        <li class="list-group-item text-center"><img src="~/media/logo@(equipo.Nombre).png" alt="Logo SPE" style="@(equipo.Nombre == "ESPOL" ? "width: 150px;" : "width: 50px;");" /></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row"><div class="col space"></div></div>
+    <div class="row"><div class="col space"></div></div>
+    <div class="row mt-xl-5">
+        <div class="col d-flex align-items-center justify-content-center">
+            <a asp-action="Start" asp-controller="Juez" class="btn btn-primary">
+                Comenzar Torneo
+            </a>
+
+        </div>
+    </div>
+</div>

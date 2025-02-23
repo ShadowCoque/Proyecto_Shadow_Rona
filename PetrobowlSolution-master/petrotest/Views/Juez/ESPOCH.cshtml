@@ -1,0 +1,137 @@
+﻿@using Domain;
+@model List<Persona>
+@{
+    ViewData["Title"] = "Equipo";
+}
+@if ((int)ViewBag.Count == 4 && ViewBag.capCount == 1)
+{
+    <div class="container">
+    <div class="row">
+        <div class="col-8" style="text-align:center">
+            <h1>Equipo ESPOCH</h1>
+        </div>
+        <div class="col-4" style="text-align:end">
+            <img src="~/media/logoESPOCH.png" alt="Logo ESPOCH" style="width:100px" />
+        </div>
+    </div>
+    
+
+
+
+    <div class="row"><div class="col space"></div></div>
+    <div class="row align-items-center">
+        <div class="col d-flex justify-content-center" style="text-align:center">
+            <div id="capitan">
+                <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">
+                    @*<a href="@Url.Action("OtraVista", "Controlador", new { competidorId = competidor.id })" class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">*@
+                    ESPOCH_CAP_@(ViewBag.cap[0].Nombre)_@(ViewBag.cap[0].Apellido)
+                </a>
+            </div>
+
+        </div>
+        <div class="col d-flex justify-content-center">
+
+            <div id="jugador1">
+                <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">
+                    ESPOCH_@(Model[0].Nombre)_@(Model[0].Apellido)
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row"><div class="col space"></div></div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+
+            <div id="jugador2">
+                <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">
+                    ESPOCH_@Model[1].Nombre)_@(Model[1].Apellido)
+                </a>
+            </div>
+
+        </div>
+        <div class="col d-flex justify-content-center ">
+
+            <div id="jugador3">
+                <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">
+                    ESPOCH_@(Model[2].Nombre)_@(Model[2].Apellido)
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="row"><div class="col space"></div></div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+
+            <div id="jugador4">
+                <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">
+                    ESPOCH_@(Model[3].Nombre)_@(Model[3].Apellido)
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row"><div class="col space"></div></div>
+    <div class="row">
+        <div class="col d-flex justify-content-end">
+
+            <div id="jugadorReserva">
+                <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center competidor">
+                    ESPOCH_@(ViewBag.reserva.Nombre)_@(ViewBag.reserva.Apellido)_Reserva
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+
+}
+
+else
+{
+    <div class="alert alert-warning alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>¡Cuidado!</strong> No se han agregado todos los participantes.
+    </div>
+}
+<style>
+    .btncard {
+        width: 300px;
+        height: 60px;
+    }
+
+    .competidor {
+        color: white;
+    }
+
+    #jugadorReserva {
+        color: white;
+    }
+
+    #jugador1 {
+        color: white;
+    }
+
+    #jugador2 {
+        color: white;
+    }
+
+    #jugador3 {
+        color: white;
+    }
+
+    #jugador4 {
+        color: white;
+    }
+
+    #capitan {
+        color: white;
+    }
+
+</style>
+
+

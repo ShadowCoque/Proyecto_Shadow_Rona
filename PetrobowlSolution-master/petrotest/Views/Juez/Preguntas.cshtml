@@ -1,0 +1,130 @@
+﻿@using Domain;
+@model List<Pregunta>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Preguntas:";
+}
+<div class="container mt-5" style="text-align:center">
+    <div class="d-flex justify-content-center"></div>
+
+    <h1>Preguntas Disponibles</h1>
+
+</div>
+
+<div class="row"><div class="col space"></div></div>
+<div>
+
+    <table id="preguntasTable" class="table text-center">
+        <thead class="thead-dark">
+
+            <tr>
+                <th scope="col" class="col-1">Número</th>
+                <th scope="col" class="col-2">Pregunta</th>
+                <th scope="col" class="col-2">Respuesta</th>
+                <th scope="col" class="col-2">Acción</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td class="align-middle">@user.id</td>
+                    <td class="align-middle">@user.Descripcion</td>
+                    <td class="align-middle">@user.Respuestas!.FirstOrDefault()!.Descripcion</td>
+                    <td class="align-middle">
+                        <a class="btn btn-warning" title="Editar" data-bs-toggle="modal" data-bs-target="#EditarUser" data-id="@user.id" data-idresp="@user.Respuestas!.FirstOrDefault()!.id">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+             </tbody>
+    </table>
+</div>
+
+@*Modales*@
+
+<form asp-controller="Juez" asp-action="EditarPregunta" method="post" class="form w-100">
+    <div class="modal fade" tabindex="-1" id="EditarUser">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Preguntas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-6">
+                        <label class="col-lg-4 col-form-label fw-semibold fs-6">Pregunta</label>
+                        <div class="col-lg-8 fv-row">
+                            <input id="Idpreg" type="text" name="Idpreg" class="form-control bg-transparent" hidden />
+                            <input id="pregunta" name="pregunta" class="form-control" placeholder="Ingrese la pregunta">
+                        </div>
+                    </div>
+                    <div class="row mb-6 mt-3">
+                        <label class="col-lg-4 col-form-label fw-semibold fs-6">Respuesta</label>
+                        <div class="col-lg-8 fv-row">
+                            <input id="Idresp" type="text" name="Idresp" class="form-control bg-transparent" hidden />
+                            <input id="respuesta" name="respuesta" class="form-control" placeholder="Ingrese la respuesta">
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#preguntasTable').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "info": true,
+                "autoWidth": true,
+                "pageLength": 6,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            debugger;
+            const buttons = document.querySelectorAll('[data-bs-target="#EditarUser"]');
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', e => {
+                    let Pregunta = button?.parentElement.parentElement?.children[1].textContent;
+                    let Respuesta = button?.parentElement.parentElement?.children[2].textContent;
+                    let idPregunta = button.getAttribute('data-id');
+                    let idRespuesta = button.getAttribute('data-idresp');
+                    cambiaValores(Pregunta, Respuesta, idPregunta, idRespuesta);
+                });
+
+                function cambiaValores(Pregunta, Respuesta, idPregunta, idRespuesta) {
+                    var inputPregunta = document.getElementById("pregunta");
+                    var inputRespuesta = document.getElementById("respuesta");
+                    var inputidPreg = document.getElementById("Idpreg");
+                    var inputidResp = document.getElementById("Idresp");
+
+                    inputidPreg.value = idPregunta;
+                    inputidResp.value = idRespuesta;
+                    inputPregunta.value = Pregunta;
+                    inputRespuesta.value = Respuesta;
+
+                }
+            });
+        });
+    </script>
+}

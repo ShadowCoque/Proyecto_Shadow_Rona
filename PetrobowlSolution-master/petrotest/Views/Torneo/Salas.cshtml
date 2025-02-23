@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Torneo";
+}
+<div class="row">
+    <div class="col-12">
+        <h2>Seleccione la sala asignada para el torneo</h2>
+        <div class="row">
+            @foreach (var e in petrotest.Controllers.TorneoController.Rooms)
+            {
+                <div class="col-md-4 col-sm-6 mb-4 mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@e.Value</h5>
+                            <p class="card-text">
+                                @if (e.Key >= 1 && e.Key <= 9)
+                                {
+                                    <span>Sala para clasificación.</span>
+                                }
+                                else if (e.Key == petrotest.Controllers.TorneoController.Rooms.Count - 1)
+                                {
+                                    <span>Sala para la semifinal del PetroTest</span>
+                                }
+                                else if (e.Key == petrotest.Controllers.TorneoController.Rooms.Count)
+                                {
+                                    <span>Sala para la final del PetroTest</span>
+                                }
+                                else
+                                {
+                                    <span>Otra descripción para las salas restantes.</span>
+                                }
+                            </p>
+                            <a href="~/Torneo/Room?room=@e.Key" class="btn btn-primary">Ir a la sala</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
