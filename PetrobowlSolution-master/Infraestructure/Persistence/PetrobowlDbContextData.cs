@@ -46,7 +46,7 @@ namespace Infraestructure.Persistence
                         Apellido = "Amores",
                         Email = "ronny.amores@epn.edu.ec",
                         UserName = "ronalatiburona",
-                        Telefono = "0992620529",
+                        Telefono = "",
                     };
                     await userManager.CreateAsync(usuarioAdmin, "RonnyPetBow2024$");
                     await userManager.AddToRoleAsync(usuarioAdmin, Role.Admin);
