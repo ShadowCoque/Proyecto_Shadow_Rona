@@ -114,38 +114,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row mb-6">
-                    <label class="col-lg-4 col-form-label fw-semibold fs-6 text-center">ESPE</label>
-                    <div class="col-lg-8 fv-row">
-                        <div class="row">
-                            <div class="col d-flex justify-content-end">
-                                <form method="post" asp-action="Sumar" asp-controller="Juez" class="form" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="1" />
-                                    <button class="btn btn-success" title="Mas" type="submit">
-                                        <i class="fas fa-solid fa-plus"></i>
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="col d-flex justify-content-start">
-                                <form method="post" asp-action="Restar" asp-controller="Juez" class="form" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="1" />
-                                    <button class="btn btn-danger" title="Menos" type="submit">
-                                        <i class="fas fa-solid fa-minus"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
 
-                    </div>
-                        <hr class="mt-2">
+                 <hr class="mt-2">
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label fw-semibold fs-6 text-center">ESPOCH</label>
                     <div class="col-lg-8 fv-row">
                         <div class="row">
                             <div class="col d-flex justify-content-end">
                                 <form method="post" asp-action="Sumar" asp-controller="Juez" class="form" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="3" />
+                                    <input type="hidden" name="id" value="2" />
                                     <button class="btn btn-success" title="Mas" type="submit">
                                         <i class="fas fa-solid fa-plus"></i>
                                     </button>
@@ -153,7 +130,7 @@
                             </div>
                             <div class="col d-flex justify-content-start">
                                 <form method="post" asp-action="Restar" asp-controller="Juez" class="form" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="3" />
+                                    <input type="hidden" name="id" value="2" />
                                     <button class="btn btn-danger" title="Menos" type="submit">
                                         <i class="fas fa-solid fa-minus"></i>
                                     </button>
@@ -170,7 +147,7 @@
                         <div class="row">
                             <div class="col d-flex justify-content-end">
                                 <form method="post" asp-action="Sumar" asp-controller="Juez" class="form" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="2" />
+                                    <input type="hidden" name="id" value="1" />
                                     <button class="btn btn-success" title="Mas" type="submit">
                                         <i class="fas fa-solid fa-plus"></i>
                                     </button>
@@ -178,7 +155,7 @@
                             </div>
                             <div class="col d-flex justify-content-start">
                                 <form method="post" asp-action="Restar" asp-controller="Juez" class="form" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="2" />
+                                    <input type="hidden" name="id" value="1" />
                                     <button class="btn btn-danger" title="Menos" type="submit">
                                         <i class="fas fa-solid fa-minus"></i>
                                     </button>
@@ -195,7 +172,7 @@
                         <div class="row">
                             <div class="col d-flex justify-content-end">
                                 <form method="post" asp-action="Sumar" asp-controller="Juez" class="form" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="4" />
+                                    <input type="hidden" name="id" value="3" />
                                     <button class="btn btn-success" title="Mas" type="submit">
                                         <i class="fas fa-solid fa-plus"></i>
                                     </button>
@@ -203,7 +180,7 @@
                             </div>
                             <div class="col d-flex justify-content-start">
                                 <form method="post" asp-action="Restar" asp-controller="Juez" class="form" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="4" />
+                                    <input type="hidden" name="id" value="3" />
                                     <button class="btn btn-danger" title="Menos" type="submit">
                                         <i class="fas fa-solid fa-minus"></i>
                                     </button>
@@ -220,7 +197,7 @@
                         <div class="row">
                             <div class="col d-flex justify-content-end">
                                 <form method="post" asp-action="Sumar" asp-controller="Juez" class="form" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="5" />
+                                    <input type="hidden" name="id" value="4" />
                                     <button class="btn btn-success" title="Mas" type="submit">
                                         <i class="fas fa-solid fa-plus"></i>
                                     </button>
@@ -228,7 +205,7 @@
                             </div>
                             <div class="col d-flex justify-content-start">
                                 <form method="post" asp-action="Restar" asp-controller="Juez" class="form" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="5" />
+                                    <input type="hidden" name="id" value="4" />
                                     <button class="btn btn-danger" title="Menos" type="submit">
                                         <i class="fas fa-solid fa-minus"></i>
                                     </button>
@@ -239,30 +216,6 @@
 
                 </div>
                 <hr class="mt-2">
-                <div class="row mb-6">
-                    <label class="col-lg-4 col-form-label fw-semibold fs-6 text-center">UPSE</label>
-                    <div class="col-lg-8 fv-row">
-                        <div class="row">
-                            <div class="col d-flex justify-content-end">
-                                <form method="post" asp-action="Sumar" asp-controller="Juez" class="form" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="6" />
-                                    <button class="btn btn-success" title="Mas" type="submit">
-                                        <i class="fas fa-solid fa-plus"></i>
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="col d-flex justify-content-start">
-                                <form method="post" asp-action="Restar" asp-controller="Juez" class="form" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="6" />
-                                    <button class="btn btn-danger" title="Menos" type="submit">
-                                        <i class="fas fa-solid fa-minus"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -418,7 +371,7 @@
             "autoWidth": true,
             "pageLength": 5,
             "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                    "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
             }
         });
     });

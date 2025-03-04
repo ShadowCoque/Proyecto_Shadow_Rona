@@ -324,7 +324,7 @@ namespace Infraestructure.Persistence
                 {
                     var actual = new BancoPregunta
                     {
-                        Periodo = "Marzo-2024",
+                        Periodo = "Marzo-2025",
                         CompetenciaId = 1,
 
                     };
@@ -337,7 +337,7 @@ namespace Infraestructure.Persistence
                 if (!context.Preguntas.Any())
                 {
                     var bancoPregunta = await context.BancoPreguntas
-                        .FirstOrDefaultAsync(x => x.Periodo == "Marzo-2024");
+                        .FirstOrDefaultAsync(x => x.Periodo == "Marzo-2025");
 
                     if (bancoPregunta != null)
                     {
