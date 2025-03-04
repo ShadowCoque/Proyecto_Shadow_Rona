@@ -48,8 +48,8 @@ namespace Infraestructure.Persistence
                         UserName = "ronalatiburona",
                         Telefono = "",
                     };
-                    await userManager.CreateAsync(usuarioAdmin, "RonnyPetBow2024$");
-                    await userManager.AddToRoleAsync(usuarioAdmin, Role.Admin);
+                    await userManager.CreateAsync(usuarioAdmin2, "RonnyPetBow2024$");
+                    await userManager.AddToRoleAsync(usuarioAdmin2, Role.Admin);
 
 
                     //Jueces
@@ -146,7 +146,7 @@ namespace Infraestructure.Persistence
                     await userManager.AddToRoleAsync(Precidencia, Role.Juez);
 
 
-                    var usuarioCompetidor = new Usuario
+                    /*var usuarioCompetidor = new Usuario
                     {
                         Nombre = "Alvaro",
                         Apellido = "Mina",
@@ -156,7 +156,7 @@ namespace Infraestructure.Persistence
                         Equipo = 1
                     };
                     await userManager.CreateAsync(usuarioCompetidor, "KevMinPetBow2024$");
-                    await userManager.AddToRoleAsync(usuarioCompetidor, Role.Competidor);
+                    await userManager.AddToRoleAsync(usuarioCompetidor, Role.Competidor);*/
 
 
                     //Veedores 1
@@ -234,7 +234,7 @@ namespace Infraestructure.Persistence
 
                     // Capitanes
 
-                    var CapitanESPE = new Usuario
+                    /*var CapitanESPE = new Usuario
                     {
                         Nombre = "Ronald",
                         Apellido = "Villacis",
@@ -244,7 +244,7 @@ namespace Infraestructure.Persistence
                         Equipo = 1
                     };
                     await userManager.CreateAsync(CapitanESPE, "RonaldVillacisEspePetBow2024$");
-                    await userManager.AddToRoleAsync(CapitanESPE, Role.Competidor);
+                    await userManager.AddToRoleAsync(CapitanESPE, Role.Competidor);*/
 
                     var CapitanEPN = new Usuario
                     {
@@ -253,7 +253,7 @@ namespace Infraestructure.Persistence
                         Email = "jesus.leon@epn.edu.ec",
                         UserName = "CapitanEPN",
                         Telefono = "0999999999",
-                        Equipo = 2
+                        Equipo = 1
                     };
                     await userManager.CreateAsync(CapitanEPN, "CapJesusEPNPetBow2024$");
                     await userManager.AddToRoleAsync(CapitanEPN, Role.Competidor);
@@ -265,12 +265,12 @@ namespace Infraestructure.Persistence
                         Email = "saaltamirano@uce.edu.ec",
                         UserName = "CapitanUCE",
                         Telefono = "0999999999",
-                        Equipo = 5
+                        Equipo = 4
                     };
                     await userManager.CreateAsync(CapitanUCE, "CapSebastianUCEPetBow2024$");
                     await userManager.AddToRoleAsync(CapitanUCE, Role.Competidor);
 
-                    var CapitanUPSE = new Usuario
+                    /*var CapitanUPSE = new Usuario
                     {
                         Nombre = "Anthony",
                         Apellido = "Miranda",
@@ -280,7 +280,7 @@ namespace Infraestructure.Persistence
                         Equipo = 6
                     };
                     await userManager.CreateAsync(CapitanUPSE, "CapMirandaUPSEPetBow2024$");
-                    await userManager.AddToRoleAsync(CapitanUPSE, Role.Competidor);
+                    await userManager.AddToRoleAsync(CapitanUPSE, Role.Competidor);*/
 
                     var CapitanESPOCH = new Usuario
                     {
@@ -289,7 +289,7 @@ namespace Infraestructure.Persistence
                         Email = "yecalero2001@gmail.com",
                         UserName = "CapitanESPOCH",
                         Telefono = "0999999999",
-                        Equipo = 3
+                        Equipo = 2
                     };
                     await userManager.CreateAsync(CapitanESPOCH, "CapYordanESPOCHPetBow2024$");
                     await userManager.AddToRoleAsync(CapitanESPOCH, Role.Competidor);
@@ -301,7 +301,7 @@ namespace Infraestructure.Persistence
                         Email = "angmboza@espol.edu.ec",
                         UserName = "MiguelBoza",
                         Telefono = "0999999999",
-                        Equipo = 4
+                        Equipo = 3
                     };
                     await userManager.CreateAsync(CapitanESPOL, "CapBozaESPOLPetBow2024$");
                     await userManager.AddToRoleAsync(CapitanESPOL, Role.Competidor);
@@ -336,14 +336,6 @@ namespace Infraestructure.Persistence
 
                 if (!context.Equipos.Any())
                 {
-                    var ESPE = new Equipo
-                    {
-                        Nombre = "ESPE",
-                        Universidad = "Universidad de las Fuerzas Armadas ESPE",
-                        CompetenciaId = 1,
-                    };
-                    await context.AddAsync(ESPE);
-
                     var EPN = new Equipo
                     {
                         Nombre = "EPN",
@@ -376,13 +368,13 @@ namespace Infraestructure.Persistence
                     };
                     await context.AddAsync(UCE);
 
-                    var UPSE = new Equipo
+                    /*var UPSE = new Equipo
                     {
                         Nombre = "UPSE",
                         Universidad = "Universidad Estatal Peninsula de Santa Elena",
                         CompetenciaId = 1,
                     };
-                    await context.AddAsync(UPSE);
+                    await context.AddAsync(UPSE);*/
                     await context.SaveChangesAsync();
                 }
 
