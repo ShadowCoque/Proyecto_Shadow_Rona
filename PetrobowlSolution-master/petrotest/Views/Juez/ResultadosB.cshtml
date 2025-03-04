@@ -27,29 +27,21 @@
                     <td class="align-middle">
                         @if (resultado.Equipos != null)
                         {
-                            if (resultado.Equipos.id == 1)
-                            {
-                                <img src="~/media/logoESPE.png" alt="Logo ESPE" style="width:30px" />
-                            }
-                            else if (@resultado.Equipos?.id == 2)
+                            @if (@resultado.Equipos?.id == 1)
                             {
                                 <img src="~/media/logoEPN.png" alt="Logo EPN" style="width:30px" />
                             }
-                            else if (@resultado.Equipos?.id == 3)
+                            else if (@resultado.Equipos?.id == 2)
                             {
                                 <img src="~/media/logoESPOCH.png" alt="Logo ESPOCH" style="width:30px" />
                             }
-                            else if (@resultado.Equipos?.id == 4)
+                            else if (@resultado.Equipos?.id == 3)
                             {
                                 <img src="~/media/logoESPOL.png" alt="Logo ESPOL" style="width:100px" />
                             }
-                            else if (@resultado.Equipos?.id == 5)
+                            else if (@resultado.Equipos?.id == 4)
                             {
                                 <img src="~/media/logoUCE.png" alt="Logo UCE" style="width:30px" />
-                            }
-                            else if (@resultado.Equipos?.id == 6)
-                            {
-                                <img src="~/media/logoUPSE.png" alt="Logo UPSE" style="width:30px" />
                             }
                         }
                     </td>

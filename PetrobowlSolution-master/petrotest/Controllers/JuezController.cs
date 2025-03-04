@@ -112,7 +112,7 @@ namespace petrotest.Controllers
             for (int i = 0; i < equiposSorteados.Count; i++)
             {
                 var equipo = equiposSorteados[i];
-                if (i < 3)
+                if (i < 2)
                 {
                     equipo.Grupo = "A";
                 }
@@ -288,28 +288,6 @@ namespace petrotest.Controllers
             return RedirectToAction("Preguntas","Juez");
         }
 
-
-        [Authorize(Roles = "Admin, Juez, Veedor")]
-        public async Task<IActionResult> ESPE()
-        {
-          
-
-                var includes = new List<Expression<Func<Persona, object>>>
-            {
-                p => p.Equipo!,
-                p => p.Usuario!
-            };
-                var user = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 1 && x.Capitan == false && x.Status == UserStatus.Inactivo==false, null, includes);
-                var cap = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 1 && x.Capitan == true, null, includes);
-                ViewBag.cap = cap;
-                var reserva = await _unitOfWork.Repository<Persona>().GetEntityAsync(x => x.Status ==
-                                                                                            UserStatus.Inactivo && x.EquipoId ==1);
-                ViewBag.reserva = reserva;
-                ViewBag.Count= user.Count();
-                ViewBag.capCount = cap.Count();
-                return View(user);
-
-        }
         [Authorize(Roles = "Admin, Juez, Veedor")]
         public async Task<IActionResult> ESPOCH()
         {
@@ -374,25 +352,6 @@ namespace petrotest.Controllers
             return View(user);
 
 
-        }
-
-        [Authorize(Roles = "Admin, Juez, Veedor")]
-        public async Task<IActionResult> UPSE()
-        {
-            var includes = new List<Expression<Func<Persona, object>>>
-            {
-                p => p.Equipo!,
-                p => p.Usuario!
-            };
-            var user = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 6 && x.Capitan == false && x.Status == UserStatus.Inactivo == false, null, includes);
-            var cap = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 6 && x.Capitan == true, null, includes);
-            ViewBag.cap = cap;
-            var reserva = await _unitOfWork.Repository<Persona>().GetEntityAsync(x => x.Status ==
-                                                                                        UserStatus.Inactivo && x.EquipoId ==6);
-            ViewBag.reserva = reserva;
-            ViewBag.Count = user.Count();
-            ViewBag.capCount = cap.Count();
-            return View(user);
         }
 
         [Authorize(Roles = "Admin, Juez, Veedor")]
