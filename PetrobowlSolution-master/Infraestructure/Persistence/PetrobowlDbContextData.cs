@@ -1,6 +1,7 @@
 ﻿using Application.Models.Authorization;
 using Domain;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Drawing.Drawing2D;
 
@@ -332,6 +333,49 @@ namespace Infraestructure.Persistence
                 }
 
 
+                // Insertar una Pregunta y su Respuesta
+                if (!context.Preguntas.Any())
+                {
+                    var bancoPregunta = await context.BancoPreguntas
+                        .FirstOrDefaultAsync(x => x.Periodo == "Marzo-2024");
+
+                    if (bancoPregunta != null)
+                    {
+                        var pregunta = new Pregunta
+                        {
+                            Descripcion = "¿Cuál es la capital de Francia?",
+                            BancoPreguntaId = bancoPregunta.id,
+                            Status = PreguntaStatus.Activa,
+                            CreatedBy = "Admin",
+                            CreatedDate = DateTime.Now
+                        };
+
+                        await context.Preguntas.AddAsync(pregunta);
+                        await context.SaveChangesAsync();
+
+                        var preguntaInsertada = await context.Preguntas
+                            .FirstOrDefaultAsync(p => p.Descripcion == "¿Cuál es la capital de Francia?");
+
+                        if (preguntaInsertada != null)
+                        {
+                            var respuesta = new Respuesta
+                            {
+                                Descripcion = "París",
+                                Correcta = true,
+                                PreguntaId = preguntaInsertada.id,
+                                CreatedBy = "Admin",
+                                CreatedDate = DateTime.Now
+                            };
+
+                            await context.Respuestas.AddAsync(respuesta);
+                            await context.SaveChangesAsync();
+                        }
+                    }
+                }
+
+
+
+
                 // Insertar EQUIPOS
 
                 if (!context.Equipos.Any())
@@ -377,6 +421,7 @@ namespace Infraestructure.Persistence
                     await context.AddAsync(UPSE);*/
                     await context.SaveChangesAsync();
                 }
+
 
             }
             catch (Exception ex)
