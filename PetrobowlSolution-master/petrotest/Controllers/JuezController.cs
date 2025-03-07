@@ -298,11 +298,11 @@ namespace petrotest.Controllers
                 p => p.Equipo!,
                 p => p.Usuario!
             };
-            var user = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 3 && x.Capitan == false && x.Status == UserStatus.Inactivo==false, null, includes);
-            var cap = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 3 && x.Capitan == true, null, includes);
+            var user = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 2 && x.Capitan == false && x.Status == UserStatus.Inactivo==false, null, includes);
+            var cap = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 2 && x.Capitan == true, null, includes);
             ViewBag.cap = cap;
             var reserva = await _unitOfWork.Repository<Persona>().GetEntityAsync(x => x.Status ==
-                                                                                        UserStatus.Inactivo && x.EquipoId == 3);
+                                                                                        UserStatus.Inactivo && x.EquipoId == 2);
             ViewBag.reserva = reserva;
             ViewBag.Count = user.Count();
             ViewBag.capCount = cap.Count();
@@ -320,11 +320,11 @@ namespace petrotest.Controllers
                 p => p.Equipo!,
                 p => p.Usuario!
             };
-            var user = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 5 && x.Capitan == false && x.Status == UserStatus.Inactivo == false, null, includes);
-            var cap = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 5 && x.Capitan == true, null, includes);
+            var user = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 4 && x.Capitan == false && x.Status == UserStatus.Inactivo == false, null, includes);
+            var cap = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 4 && x.Capitan == true, null, includes);
             ViewBag.cap = cap;
             var reserva = await _unitOfWork.Repository<Persona>().GetEntityAsync(x => x.Status ==
-                                                                                        UserStatus.Inactivo && x.EquipoId ==5);
+                                                                                        UserStatus.Inactivo && x.EquipoId ==4);
             ViewBag.reserva = reserva;
             ViewBag.Count = user.Count();
             ViewBag.capCount = cap.Count();
@@ -342,11 +342,11 @@ namespace petrotest.Controllers
                 p => p.Equipo!,
                 p => p.Usuario!
             };
-            var user = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 4 && x.Capitan == false && x.Status == UserStatus.Inactivo == false, null, includes);
-            var cap = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 4 && x.Capitan == true, null, includes);
+            var user = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 3 && x.Capitan == false && x.Status == UserStatus.Inactivo == false, null, includes);
+            var cap = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 3 && x.Capitan == true, null, includes);
             ViewBag.cap = cap;
             var reserva = await _unitOfWork.Repository<Persona>().GetEntityAsync(x => x.Status ==
-                                                                                        UserStatus.Inactivo && x.EquipoId == 4);
+                                                                                        UserStatus.Inactivo && x.EquipoId == 3);
             ViewBag.reserva = reserva;
             ViewBag.Count = user.Count();
             ViewBag.capCount = cap.Count();
@@ -364,11 +364,11 @@ namespace petrotest.Controllers
                 p => p.Equipo!,
                 p => p.Usuario!
             };
-            var user = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 2 && x.Capitan == false && x.Status == UserStatus.Inactivo == false, null, includes);
-            var cap = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 2 && x.Capitan == true, null, includes);
+            var user = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 1 && x.Capitan == false && x.Status == UserStatus.Inactivo == false, null, includes);
+            var cap = await _unitOfWork.Repository<Persona>().GetAsync(x => x.EquipoId == 1 && x.Capitan == true, null, includes);
             ViewBag.cap = cap;
             var reserva = await _unitOfWork.Repository<Persona>().GetEntityAsync(x => x.Status ==
-                                                                                        UserStatus.Inactivo && x.EquipoId == 2);
+                                                                                        UserStatus.Inactivo && x.EquipoId == 1);
             ViewBag.reserva = reserva;
             ViewBag.Count = user.Count();
             ViewBag.capCount = cap.Count();

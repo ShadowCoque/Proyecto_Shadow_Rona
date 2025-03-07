@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Equipo";
 }
-@if ((int)ViewBag.Count == 3 && ViewBag.capCount == 1 && ViewBag.reserva != null)
+@if ((int)ViewBag.Count == 2 && ViewBag.capCount == 1)
 {
     <div class="container">
     <div class="row">
@@ -51,41 +51,6 @@
             </div>
 
         </div>
-        <div class="col d-flex justify-content-center ">
-
-            <div id="jugador3">
-                <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">
-                    ESPOL_@(Model[2].Nombre)_@(Model[2].Apellido)
-                </a>
-            </div>
-
-        </div>
-    </div>
-    <div class="row"><div class="col space"></div></div>
-    <div class="row">
-        <div class="col d-flex justify-content-center">
-
-            <div id="jugador4">
-                <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center">
-                    ESPOL_@(Model[3].Nombre)_@(Model[3].Apellido)
-                </a>
-            </div>
-
-        </div>
-
-    </div>
-    <div class="row"><div class="col space"></div></div>
-    <div class="row">
-        <div class="col d-flex justify-content-end">
-
-            <div id="jugadorReserva">
-                <a class="btn btn-secondary competidor-btn btncard d-flex align-items-center justify-content-center competidor">
-                    ESPOL_@(ViewBag.reserva.Nombre)_@(ViewBag.reserva.Apellido)_Reserva
-                </a>
-            </div>
-
-        </div>
-
     </div>
     </div>
 }
