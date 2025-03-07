@@ -333,7 +333,7 @@ namespace Infraestructure.Persistence
                 }
 
 
-                // Insertar una Pregunta y su Respuesta
+                /* Insertar una Pregunta y su Respuesta
                 if (!context.Preguntas.Any())
                 {
                     var bancoPregunta = await context.BancoPreguntas
@@ -371,7 +371,72 @@ namespace Infraestructure.Persistence
                             await context.SaveChangesAsync();
                         }
                     }
+                }*/
+
+                // Asegúrate de que el banco de preguntas existe
+                var bancoPregunta = await context.BancoPreguntas
+                    .FirstOrDefaultAsync(x => x.Periodo == "Marzo-2025");
+
+                if (bancoPregunta != null)
+                {
+                    // Lista de preguntas y respuestas (Aquí debes poner tus preguntas)
+                    var listaPreguntas = new List<(string Pregunta, string Respuesta)>
+                    {
+                        ("¿Cuál es la capital de Francia?", "París"),
+                        ("¿Cuántos continentes hay en el mundo?", "7"),
+                        ("¿Quién escribió 'Cien años de soledad'?", "Gabriel García Márquez"),
+                        ("¿En qué año llegó el hombre a la Luna?", "1969"),
+                        ("¿Cuál es el planeta más grande del sistema solar?", "Júpiter"),
+                        // Agrega aquí más preguntas hasta llegar a las 200
+                    };
+
+                    var preguntasAInsertar = new List<Pregunta>();
+                    var respuestasAInsertar = new List<Respuesta>();
+
+                    foreach (var (preguntaTexto, respuestaTexto) in listaPreguntas)
+                    {
+                        var pregunta = new Pregunta
+                        {
+                            Descripcion = preguntaTexto,
+                            BancoPreguntaId = bancoPregunta.id,
+                            Status = PreguntaStatus.Activa,
+                            CreatedBy = "Admin",
+                            CreatedDate = DateTime.Now
+                        };
+
+                        preguntasAInsertar.Add(pregunta);
+                    }
+
+                    // Insertamos todas las preguntas en un solo paso
+                    await context.Preguntas.AddRangeAsync(preguntasAInsertar);
+                    await context.SaveChangesAsync();
+
+                    // Ahora insertamos las respuestas vinculadas a las preguntas
+                    foreach (var pregunta in preguntasAInsertar)
+                    {
+                        var respuesta = new Respuesta
+                        {
+                            Descripcion = listaPreguntas.First(p => p.Pregunta == pregunta.Descripcion).Respuesta,
+                            Correcta = true, // Ajustar si hay múltiples respuestas
+                            PreguntaId = pregunta.id,
+                            CreatedBy = "Admin",
+                            CreatedDate = DateTime.Now
+                        };
+
+                        respuestasAInsertar.Add(respuesta);
+                    }
+
+                    // Insertamos todas las respuestas en un solo paso
+                    await context.Respuestas.AddRangeAsync(respuestasAInsertar);
+                    await context.SaveChangesAsync();
+
+                    Console.WriteLine($"✅ Se han insertado {preguntasAInsertar.Count} preguntas y respuestas correctamente.");
                 }
+                else
+                {
+                    Console.WriteLine("❌ No se encontró el banco de preguntas 'Marzo-2025'.");
+                }
+
 
 
 
