@@ -1,5 +1,6 @@
 ﻿using Application.Models.Authorization;
 using Domain;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -135,16 +136,16 @@ namespace Infraestructure.Persistence
                     await userManager.CreateAsync(Christofer, "ChristoferPetBow2024@");
                     await userManager.AddToRoleAsync(Christofer, Role.Juez);
                     //juez
-                    var Precidencia = new Usuario
+                    var Presidencia = new Usuario
                     {
-                        Nombre = "Precidencia",
-                        Apellido = "Precidencia",
+                        Nombre = "Presidencia",
+                        Apellido = "Presidencia",
                         Email = "presidencia@spe-ecuador.org",
                         UserName = "Presidencia97",
                         Telefono = "0998358664",
                     };
-                    await userManager.CreateAsync(Precidencia, "PresidenciaPetBow2024@");
-                    await userManager.AddToRoleAsync(Precidencia, Role.Juez);
+                    await userManager.CreateAsync(Presidencia, "PresidenciaPetBow2024@");
+                    await userManager.AddToRoleAsync(Presidencia, Role.Juez);
 
 
                     /*var usuarioCompetidor = new Usuario
@@ -312,7 +313,7 @@ namespace Infraestructure.Persistence
                 {
                     var actual = new Competencia
                     {
-                        Anio = 2024
+                        Anio = 2025
                     };
                     await context.Competencias!.AddAsync(actual);
                     await context.SaveChangesAsync();
@@ -476,16 +477,82 @@ namespace Infraestructure.Persistence
                         CompetenciaId = 1,
                     };
                     await context.AddAsync(UCE);
-
-                    /*var UPSE = new Equipo
-                    {
-                        Nombre = "UPSE",
-                        Universidad = "Universidad Estatal Peninsula de Santa Elena",
-                        CompetenciaId = 1,
-                    };
-                    await context.AddAsync(UPSE);*/
                     await context.SaveChangesAsync();
                 }
+                // ✅ Lista de competidores adicionales
+                var nuevosCompetidores = new List<Usuario>
+                {
+                    new Usuario
+                    {   Nombre = "Santiago",
+                        Apellido = "Benitez",
+                        Email = "sbenitez@epn.edu.ec",
+                        UserName = "sbenitez",
+                        Telefono = "0999999999",
+                        Equipo = 1,  // Se asigna al mismo equipo del Capitán
+                        IsActive = true  // Está activo
+                    },
+                    new Usuario
+                    {
+                        Nombre = "Fernanda",
+                        Apellido = "Yanez",
+                        Email = "fyanez@epn.edu.ec",
+                        UserName = "fyanez",
+                        Telefono = "0999999999",
+                        Equipo = 1,
+                        IsActive = true  // Activa
+                    },
+                    new Usuario
+                    {
+                        Nombre = "Miguel",
+                        Apellido = "Cordero",
+                        Email = "mcordero@epn.edu.ec",
+                        UserName = "mcordero",
+                        Telefono = "0999999999",
+                        Equipo = 1,
+                        IsActive = true  // Activo
+                    },
+                    new Usuario
+                    {
+                        Nombre = "Alejandro",
+                        Apellido = "Ponce",
+                        Email = "aponce@epn.edu.ec",
+                        UserName = "aponce",
+                        Telefono = "0999999999",
+                        Equipo = 1,
+                        IsActive = false  // 🔴 Es reserva
+                    }
+                };
+
+                // ✅ Agregar competidores a la base de datos
+                foreach (var competidor in nuevosCompetidores)
+                {
+                    var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2024$");
+
+                    if (result.Succeeded)
+                    {
+                        Persona nuevaPersona = new Persona
+                        {
+                            Nombre = competidor.Nombre,
+                            Apellido = competidor.Apellido,
+                            Email = competidor.Email,
+                            Capitan = false,  // No son capitanes
+                            EquipoId = 1,
+                            UsuarioId = competidor.Id,
+                            Status = competidor.IsActive ? UserStatus.Activo : UserStatus.Inactivo  // Si IsActive=false, es reserva
+                        };
+
+                        await context.Personas!.AddAsync(nuevaPersona);
+                        await context.SaveChangesAsync();
+
+                        Console.WriteLine($"✅ Competidor {competidor.Nombre} {competidor.Apellido} agregado correctamente.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"❌ Error al agregar {competidor.Nombre}: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                    }
+                }
+
+
 
 
             }
@@ -494,6 +561,7 @@ namespace Infraestructure.Persistence
                 var logger = loggerFactory.CreateLogger<PetrobowlDbContext>();
                 logger.LogError(ex.Message);
             }
+
         }
     }
 }
