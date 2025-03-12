@@ -546,31 +546,6 @@ namespace Infraestructure.Persistence
                     new Usuario { Nombre = "Andrea", Apellido = "Lopez", Email = "alopez@espoch.edu.ec", UserName = "alopez", Telefono = "0999999999", Equipo = 2, IsActive = false } // 🔴 Reserva
                 };
 
-                foreach (var competidor in competidoresESPOCH)
-                {
-                    var usuarioExistente = await userManager.FindByEmailAsync(competidor.Email);
-                    if (usuarioExistente == null)
-                    {
-                        Nombre = "Miguel",
-                        Apellido = "Cordero",
-                        Email = "mcordero@epn.edu.ec",
-                        UserName = "mcordero",
-                        Telefono = "0999999999",
-                        Equipo = 1,
-                        IsActive = true  // Activo
-                    },
-                    new Usuario
-                    {
-                        Nombre = "Alejandro",
-                        Apellido = "Ponce",
-                        Email = "aponce@epn.edu.ec",
-                        UserName = "aponce",
-                        Telefono = "0999999999",
-                        Equipo = 1,
-                        IsActive = false  // 🔴 Es reserva
-                    }
-                };
-
                 // ✅ Agregar competidores a la base de datos
                 foreach (var competidor in nuevosCompetidores)
                 {
