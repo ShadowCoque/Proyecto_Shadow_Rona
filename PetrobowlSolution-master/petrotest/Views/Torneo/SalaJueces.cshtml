@@ -2,14 +2,56 @@
     ViewData["Title"] = "Sala de Jueces";
 }
 
-<h1>Sala de Jueces</h1>
+<h1 class="titulo-sala">Sala de Jueces</h1>
 
 <div class="container mt-5">
-    <h3>Preguntas Recibidas</h3>
-    <div id="judgeMessages" class="alert alert-info">
+    <h3 class="titulo-preguntas">Pregunta Recibida</h3>
+    <div id="judgeMessages" class="pregunta-container">
         <strong>No hay preguntas aún.</strong>
     </div>
 </div>
+
+<style>
+    /* Estilo del título principal */
+    .titulo-sala {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-top: 20px;
+        text-transform: uppercase;
+    }
+
+    /* Estilo del contenedor de preguntas */
+    .pregunta-container {
+        background: linear-gradient(135deg, #3498db, #9b59b6);
+        color: white;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-align: center;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.5s ease-in-out, opacity 0.5s;
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    /* Animación cuando aparece una nueva pregunta */
+    .pregunta-animacion {
+        opacity: 1 !important;
+        transform: scale(1) !important;
+    }
+
+    /* Estilo del subtítulo */
+    .titulo-preguntas {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #34495e;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+</style>
 
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 <script>
@@ -27,14 +69,12 @@
         // 🔴 LIMPIA el mensaje anterior antes de agregar el nuevo
         messageContainer.innerHTML = "";
 
-        // Muestra la nueva pregunta
+        // Muestra la nueva pregunta con animación
         var newMessage = document.createElement("div");
-        newMessage.className = "alert alert-warning";
+        newMessage.className = "pregunta-animacion";
         newMessage.innerHTML = `<b><h3>${message}</h3></b>`;
 
         messageContainer.appendChild(newMessage);
+        messageContainer.classList.add("pregunta-animacion");
     });
-
-
-
 </script>
