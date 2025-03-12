@@ -170,78 +170,41 @@ namespace petrotest.Controllers
         [HttpPost]
         public async Task<IActionResult> Sumar(int id)
         {
-            var includes = new List<Expression<Func<Resultado, object>>>
-            {
-                p => p.Equipos!,
-                p => p.Competencias!
-            };
-            var resultados = await _unitOfWork.Repository<Resultado>().GetEntityAsync(x => x.EquipoId == id, includes);
+            var resultados = await _unitOfWork.Repository<Resultado>().GetEntityAsync(x => x.EquipoId == id);
 
             if (resultados == null)
             {
-                var result = new Resultado();
-                result.EquipoId = id;
-                result.CompetenciaId = 1;
-                result.Total = 10;
-
+                var result = new Resultado { EquipoId = id, CompetenciaId = 1, Total = 10 };
                 _unitOfWork.Repository<Resultado>().AddEntity(result);
-
-                var resultPersona = await _unitOfWork.Complete();
-
-                if (resultPersona <= 0)
-                {
-                    return BadRequest();
-                }
-
-                return RedirectToAction("Start","Juez");
-            }else if (resultados != null)
+            }
+            else
             {
-                resultados.Total = resultados.Total + 10;
+                resultados.Total += 10;
                 await _unitOfWork.Repository<Resultado>().UpdateAsync(resultados);
-                return RedirectToAction("Start", "Juez");
             }
 
-            
-            return View();
+            await _unitOfWork.Complete();
+            return Redirect(Request.Headers["Referer"].ToString()); // ⬅ Vuelve a la misma página
         }
 
         [HttpPost]
         public async Task<IActionResult> Restar(int id)
         {
-            var includes = new List<Expression<Func<Resultado, object>>>
-            {
-                p => p.Equipos!,
-                p => p.Competencias!
-            };
-            var resultados = await _unitOfWork.Repository<Resultado>().GetEntityAsync(x => x.EquipoId == id, includes);
+            var resultados = await _unitOfWork.Repository<Resultado>().GetEntityAsync(x => x.EquipoId == id);
 
             if (resultados == null)
             {
-                var result = new Resultado();
-                result.EquipoId = id;
-                result.CompetenciaId = 1;
-                result.Total = -5;
-
+                var result = new Resultado { EquipoId = id, CompetenciaId = 1, Total = -5 };
                 _unitOfWork.Repository<Resultado>().AddEntity(result);
-
-                var resultPersona = await _unitOfWork.Complete();
-
-                if (resultPersona <= 0)
-                {
-                    return BadRequest();
-                }
-
-                return RedirectToAction("Start", "Juez");
             }
-            else if (resultados != null)
+            else
             {
-                resultados.Total = resultados.Total - 5;
+                resultados.Total -= 5;
                 await _unitOfWork.Repository<Resultado>().UpdateAsync(resultados);
-                return RedirectToAction("Start", "Juez");
             }
 
-
-            return View();
+            await _unitOfWork.Complete();
+            return Redirect(Request.Headers["Referer"].ToString()); // ⬅ Vuelve a la misma página
         }
 
         [HttpPost]

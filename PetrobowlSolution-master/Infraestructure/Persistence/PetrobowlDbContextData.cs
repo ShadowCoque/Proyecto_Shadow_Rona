@@ -53,6 +53,17 @@ namespace Infraestructure.Persistence
                     await userManager.CreateAsync(usuarioAdmin2, "RonnyPetBow2024$");
                     await userManager.AddToRoleAsync(usuarioAdmin2, Role.Admin);
 
+                    var usuarioAdmin3 = new Usuario
+                    {
+                        Nombre = "Mario",
+                        Apellido = "Jarrin",
+                        Email = "mkjarrin@uce.edu.ec",
+                        UserName = "mkjarrin12",
+                        Telefono = "",
+                    };
+                    await userManager.CreateAsync(usuarioAdmin3, "MarioPetBow2024$");
+                    await userManager.AddToRoleAsync(usuarioAdmin3, Role.Admin);
+
 
                     //Jueces
 
@@ -488,12 +499,12 @@ namespace Infraestructure.Persistence
                 }
 
                 var competidoresEPN = new List<Usuario>
-{
-    new Usuario { Nombre = "Santiago", Apellido = "Benitez", Email = "sbenitez@epn.edu.ec", UserName = "sbenitez", Telefono = "0999999999", Equipo = 1, IsActive = true },
-    new Usuario { Nombre = "Fernanda", Apellido = "Yanez", Email = "fyanez@epn.edu.ec", UserName = "fyanez", Telefono = "0999999999", Equipo = 1, IsActive = true },
-    new Usuario { Nombre = "Miguel", Apellido = "Cordero", Email = "mcordero@epn.edu.ec", UserName = "mcordero", Telefono = "0999999999", Equipo = 1, IsActive = true },
-    new Usuario { Nombre = "Alejandro", Apellido = "Ponce", Email = "aponce@epn.edu.ec", UserName = "aponce", Telefono = "0999999999", Equipo = 1, IsActive = false } // 🔴 Reserva
-};
+                {
+                    new Usuario { Nombre = "Santiago", Apellido = "Benitez", Email = "sbenitez@epn.edu.ec", UserName = "sbenitez", Telefono = "0999999999", Equipo = 1, IsActive = true },
+                    new Usuario { Nombre = "Fernanda", Apellido = "Yanez", Email = "fyanez@epn.edu.ec", UserName = "fyanez", Telefono = "0999999999", Equipo = 1, IsActive = true },
+                    new Usuario { Nombre = "Miguel", Apellido = "Cordero", Email = "mcordero@epn.edu.ec", UserName = "mcordero", Telefono = "0999999999", Equipo = 1, IsActive = true },
+                    new Usuario { Nombre = "Alejandro", Apellido = "Ponce", Email = "aponce@epn.edu.ec", UserName = "aponce", Telefono = "0999999999", Equipo = 1, IsActive = false } // 🔴 Reserva
+                };
 
                 foreach (var competidor in competidoresEPN)
                 {
@@ -529,12 +540,12 @@ namespace Infraestructure.Persistence
                 }
 
                 var competidoresESPOCH = new List<Usuario>
-{
-    new Usuario { Nombre = "Daniela", Apellido = "Castro", Email = "dcastro@espoch.edu.ec", UserName = "dcastro", Telefono = "0999999999", Equipo = 2, IsActive = true },
-    new Usuario { Nombre = "Javier", Apellido = "Torres", Email = "jtorres@espoch.edu.ec", UserName = "jtorres", Telefono = "0999999999", Equipo = 2, IsActive = true },
-    new Usuario { Nombre = "Paula", Apellido = "Jimenez", Email = "pjimenez@espoch.edu.ec", UserName = "pjimenez", Telefono = "0999999999", Equipo = 2, IsActive = true },
-    new Usuario { Nombre = "Andrea", Apellido = "Lopez", Email = "alopez@espoch.edu.ec", UserName = "alopez", Telefono = "0999999999", Equipo = 2, IsActive = false } // 🔴 Reserva
-};
+                {
+                    new Usuario { Nombre = "Daniela", Apellido = "Castro", Email = "dcastro@espoch.edu.ec", UserName = "dcastro", Telefono = "0999999999", Equipo = 2, IsActive = true },
+                    new Usuario { Nombre = "Javier", Apellido = "Torres", Email = "jtorres@espoch.edu.ec", UserName = "jtorres", Telefono = "0999999999", Equipo = 2, IsActive = true },
+                    new Usuario { Nombre = "Paula", Apellido = "Jimenez", Email = "pjimenez@espoch.edu.ec", UserName = "pjimenez", Telefono = "0999999999", Equipo = 2, IsActive = true },
+                    new Usuario { Nombre = "Andrea", Apellido = "Lopez", Email = "alopez@espoch.edu.ec", UserName = "alopez", Telefono = "0999999999", Equipo = 2, IsActive = false } // 🔴 Reserva
+                };
 
                 foreach (var competidor in competidoresESPOCH)
                 {

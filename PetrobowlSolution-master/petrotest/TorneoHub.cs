@@ -8,7 +8,15 @@ namespace petrotest
         public async Task SendMessage(string room, string user, string message)
         {
             await Clients.Group(room).SendAsync("ReceiveMessage", user, message);
+
+            // Enviar la pregunta a los jueces en su propia sala
+            await Clients.Group("Jueces").SendAsync("ReceiveMessageForJudges", user, message);
+
             await ClearJudgeMessages(room);
+        }
+        public async Task AddJudgeToGroup()
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, "Jueces");
         }
 
         public async Task SendMessageToCompetitors(string room, string message)

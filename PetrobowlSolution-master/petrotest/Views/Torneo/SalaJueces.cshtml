@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Sala de Jueces";
+}
+
+<h1>Sala de Jueces</h1>
+
+<div class="container mt-5">
+    <h3>Preguntas Recibidas</h3>
+    <div id="judgeMessages" class="alert alert-info">
+        <strong>No hay preguntas aún.</strong>
+    </div>
+</div>
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script>
+    var connection = new signalR.HubConnectionBuilder().withUrl("/torneo").build();
+
+    connection.start().then(() => {
+        // Unir al grupo de jueces para recibir mensajes
+        connection.invoke("AddJudgeToGroup");
+    }).catch((err) => console.error(err.toString()));
+
+    // Escuchar las preguntas enviadas a los jueces
+    connection.on("ReceiveMessageForJudges", (user, message) => {
+        var messageContainer = document.getElementById("judgeMessages");
+
+        // 🔴 LIMPIA el mensaje anterior antes de agregar el nuevo
+        messageContainer.innerHTML = "";
+
+        // Muestra la nueva pregunta
+        var newMessage = document.createElement("div");
+        newMessage.className = "alert alert-warning";
+        newMessage.innerHTML = `<b><h3>${message}</h3></b>`;
+
+        messageContainer.appendChild(newMessage);
+    });
+
+
+
+</script>

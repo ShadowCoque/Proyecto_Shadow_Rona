@@ -39,7 +39,13 @@ namespace petrotest.Controllers
         {
             return View();
         }
-        
+
+        public IActionResult SalaJueces()
+        {
+            return View();
+        }
+
+
         public IActionResult Salas()
         {
             if (User.IsInRole(Role.Juez))
