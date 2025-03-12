@@ -490,9 +490,8 @@ namespace Infraestructure.Persistence
                     await context.AddAsync(UCE);
                     await context.SaveChangesAsync();
                 }
-                // ========================== ✅ UNIVERSIDAD EPN ==========================
-                var existeEPN = await context.Equipos.AnyAsync(e => e.Nombre == "EPN");
-                if (!existeEPN)
+                // ✅ Lista de competidores adicionales
+                var nuevosCompetidores = new List<Usuario>
                 {
                     await context.Equipos.AddAsync(new Equipo { Nombre = "EPN", Universidad = "Escuela Politécnica Nacional", CompetenciaId = 1 });
                     await context.SaveChangesAsync();
@@ -552,106 +551,54 @@ namespace Infraestructure.Persistence
                     var usuarioExistente = await userManager.FindByEmailAsync(competidor.Email);
                     if (usuarioExistente == null)
                     {
-                        var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2024$");
-                        if (result.Succeeded)
-                        {
-                            Persona nuevaPersona = new Persona
-                            {
-                                Nombre = competidor.Nombre,
-                                Apellido = competidor.Apellido,
-                                Email = competidor.Email,
-                                Capitan = false,
-                                EquipoId = 2,
-                                UsuarioId = competidor.Id,
-                                Status = competidor.IsActive ? UserStatus.Activo : UserStatus.Inactivo
-                            };
-                            await context.Personas!.AddAsync(nuevaPersona);
-                            await context.SaveChangesAsync();
-                            Console.WriteLine($"✅ Competidor {competidor.Nombre} {competidor.Apellido} agregado a ESPOCH.");
-                        }
+                        Nombre = "Miguel",
+                        Apellido = "Cordero",
+                        Email = "mcordero@epn.edu.ec",
+                        UserName = "mcordero",
+                        Telefono = "0999999999",
+                        Equipo = 1,
+                        IsActive = true  // Activo
+                    },
+                    new Usuario
+                    {
+                        Nombre = "Alejandro",
+                        Apellido = "Ponce",
+                        Email = "aponce@epn.edu.ec",
+                        UserName = "aponce",
+                        Telefono = "0999999999",
+                        Equipo = 1,
+                        IsActive = false  // 🔴 Es reserva
                     }
-                }
-
-                // ========================== ✅ UNIVERSIDAD ESPOL ==========================
-                var existeESPOL = await context.Equipos.AnyAsync(e => e.Nombre == "ESPOL");
-                if (!existeESPOL)
-                {
-                    await context.Equipos.AddAsync(new Equipo { Nombre = "ESPOL", Universidad = "Escuela Superior Politécnica del Litoral", CompetenciaId = 1 });
-                    await context.SaveChangesAsync();
-                }
-
-                var competidoresESPOL = new List<Usuario>
-                {
-                    new Usuario { Nombre = "Luis", Apellido = "Torres", Email = "ltorres@espol.edu.ec", UserName = "ltorres", Telefono = "0999999999", Equipo = 3, IsActive = true },
-                    new Usuario { Nombre = "Carlos", Apellido = "Navarro", Email = "cnavarro@espol.edu.ec", UserName = "cnavarro", Telefono = "0999999999", Equipo = 3, IsActive = true },
-                    // 🔴 Reserva
                 };
 
-                foreach (var competidor in competidoresESPOL)
+                // ✅ Agregar competidores a la base de datos
+                foreach (var competidor in nuevosCompetidores)
                 {
-                    var usuarioExistente = await userManager.FindByEmailAsync(competidor.Email);
-                    if (usuarioExistente == null)
+                    var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2024$");
+
+                    if (result.Succeeded)
                     {
-                        var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2024$");
-                        if (result.Succeeded)
+                        Persona nuevaPersona = new Persona
                         {
-                            Persona nuevaPersona = new Persona
-                            {
-                                Nombre = competidor.Nombre,
-                                Apellido = competidor.Apellido,
-                                Email = competidor.Email,
-                                Capitan = false,
-                                EquipoId = 3,
-                                UsuarioId = competidor.Id,
-                                Status = competidor.IsActive ? UserStatus.Activo : UserStatus.Inactivo
-                            };
-                            await context.Personas!.AddAsync(nuevaPersona);
-                            await context.SaveChangesAsync();
-                            Console.WriteLine($"✅ Competidor {competidor.Nombre} {competidor.Apellido} agregado a ESPOL.");
-                        }
+                            Nombre = competidor.Nombre,
+                            Apellido = competidor.Apellido,
+                            Email = competidor.Email,
+                            Capitan = false,  // No son capitanes
+                            EquipoId = 1,
+                            UsuarioId = competidor.Id,
+                            Status = competidor.IsActive ? UserStatus.Activo : UserStatus.Inactivo  // Si IsActive=false, es reserva
+                        };
+
+                        await context.Personas!.AddAsync(nuevaPersona);
+                        await context.SaveChangesAsync();
+
+                        Console.WriteLine($"✅ Competidor {competidor.Nombre} {competidor.Apellido} agregado correctamente.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"❌ Error al agregar {competidor.Nombre}: {string.Join(", ", result.Errors.Select(e => e.Description))}");
                     }
                 }
-
-                // ========================== ✅ UNIVERSIDAD UCE ==========================
-                var existeUCE = await context.Equipos.AnyAsync(e => e.Nombre == "UCE");
-                if (!existeUCE)
-                {
-                    await context.Equipos.AddAsync(new Equipo { Nombre = "UCE", Universidad = "Universidad Central del Ecuador", CompetenciaId = 1 });
-                    await context.SaveChangesAsync();
-                }
-
-                var competidoresUCE = new List<Usuario>
-                {
-                    new Usuario { Nombre = "Marcos", Apellido = "Gonzalez", Email = "mgonzalez@uce.edu.ec", UserName = "mgonzalez", Telefono = "0999999999", Equipo = 4, IsActive = true },
-                    new Usuario { Nombre = "Isabel", Apellido = "Ramirez", Email = "iramirez@uce.edu.ec", UserName = "iramirez", Telefono = "0999999999", Equipo = 4, IsActive = true },
-                    new Usuario { Nombre = "Ricardo", Apellido = "Vera", Email = "rvera@uce.edu.ec", UserName = "rvera", Telefono = "0999999999", Equipo = 4, IsActive = true },
-                    new Usuario { Nombre = "Julian", Apellido = "Perez", Email = "jperez@uce.edu.ec", UserName = "jperez", Telefono = "0999999999", Equipo = 4, IsActive = false } // 🔴 Reserva
-                };
-                foreach (var competidor in competidoresUCE)
-                {
-                    var usuarioExistente = await userManager.FindByEmailAsync(competidor.Email);
-                    if (usuarioExistente == null)
-                    {
-                        var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2024$");
-                        if (result.Succeeded)
-                        {
-                            Persona nuevaPersona = new Persona
-                            {
-                                Nombre = competidor.Nombre,
-                                Apellido = competidor.Apellido,
-                                Email = competidor.Email,
-                                Capitan = false,
-                                EquipoId = 4,
-                                UsuarioId = competidor.Id,
-                                Status = competidor.IsActive ? UserStatus.Activo : UserStatus.Inactivo
-                            };
-                            await context.Personas!.AddAsync(nuevaPersona);
-                            await context.SaveChangesAsync();
-                            Console.WriteLine($"✅ Competidor {competidor.Nombre} {competidor.Apellido} agregado a uce.");
-                        }
-                    }
-                }
-
 
 
 
