@@ -216,12 +216,19 @@
                     </ul>
                 </div>
             </div>
-            <div class="sidebar-footer">
-                <a id="logoutLink">
-                    <i class="fa fa-power-off"></i>    Cerrar Sesión
-                    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm"></form>
-                </a>
-            </div>
+                <div class="sidebar-footer">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="sidebar-user text-center p-2">
+                            <i class="fa fa-user-circle"></i> <strong>@User.Identity.Name</strong>
+                        </div>
+                    }
+                    <a id="logoutLink">
+                        <i class="fa fa-power-off"></i> Cerrar Sesión
+                        <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm"></form>
+                    </a>
+                </div>
+
         </nav>
         <style>
                 .sidebar-menu a {
@@ -231,6 +238,22 @@
                 .sidebar-menu i {
                     font-size: 25px; 
                 }
+
+                .sidebar-footer {
+                    background-color: #343a40; /* Color oscuro para el footer */
+                    padding: 10px;
+                    text-align: center;
+                    font-size: 1rem;
+                    border-top: 2px solid #555; /* Línea superior para separar */
+                }
+
+           
+
+                
+                    
+
+
+
         </style>
         <!-- sidebar-wrapper  -->
         <main class="page-content">
