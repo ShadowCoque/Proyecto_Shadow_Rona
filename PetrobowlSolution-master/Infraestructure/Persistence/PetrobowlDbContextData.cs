@@ -68,96 +68,50 @@ namespace Infraestructure.Persistence
 
                     //Jueces
 
-                    var Marielisa = new Usuario
-                    {
-                        Nombre = "Marielisa",
-                        Apellido = "Barragan",
-                        Email = "linda.barragan@eppetroecuador.ec",
-                        UserName = "MarielisaBarragan",
-                        Telefono = "099999999",
-                    };
-                    await userManager.CreateAsync(Marielisa, "MarielisaBarraganPetBow2024$");
-                    await userManager.AddToRoleAsync(Marielisa, Role.Juez);
-                    //Juez 1
-                    var Nelson = new Usuario
-                    {
-                        Nombre = "Nelson",
-                        Apellido = "Bravo",
-                        Email = "nelsonadrian.enriquezbravo@halliburton.com",
-                        UserName = "NelsonBravo",
-                        Telefono = "0998358664",
-                    };
-                    await userManager.CreateAsync(Nelson, "NelsonBravoPetBow2024$");
-                    await userManager.AddToRoleAsync(Nelson, Role.Juez);
-
-                    //Juez 3
-                    var Alvaro = new Usuario
-                    {
-                        Nombre = "Alvaro",
-                        Apellido = "Izurieta",
-                        Email = "aballesteros3@slb.com",
-                        UserName = "AlvaroIzurieta",
-                        Telefono = "0998358664",
-                    };
-                    await userManager.CreateAsync(Alvaro, "AlvaroIzurietaPetBow2024$");
-                    await userManager.AddToRoleAsync(Alvaro, Role.Juez);
-
-                    //Juez 4
-                    var Edwars = new Usuario
-                    {
-                        Nombre = "Edwars",
-                        Apellido = "Naranjo",
-                        Email = "edwars.naranjo@halliburton.com",
-                        UserName = "EdwarsNaranjo",
-                        Telefono = "0998358664",
-                    };
-                    await userManager.CreateAsync(Edwars, "AlvaroNaranjoPetBow2024$");
-                    await userManager.AddToRoleAsync(Edwars, Role.Juez);
-
-                    //Juez 4
                     var Lenin = new Usuario
                     {
                         Nombre = "Lenin",
                         Apellido = "Pozo",
-                        Email = "lenin.pozo@novometgroup.com",
+                        Email = "Lenin.Pozo@novometgroup.com",
                         UserName = "LeninPozo",
-                        Telefono = "0998358664",
+                        Telefono = "0999999999",
                     };
                     await userManager.CreateAsync(Lenin, "LeninPozoPetBow2024$");
                     await userManager.AddToRoleAsync(Lenin, Role.Juez);
-                    //Juez 5
-                    var Maria = new Usuario
+
+                    var Karla = new Usuario
                     {
-                        Nombre = "Maria",
-                        Apellido = "Angelica",
-                        Email = "mariaangelica.garcia@bakerhughes.com",
-                        UserName = "mangelica97",
-                        Telefono = "0998358664",
+                        Nombre = "Karla",
+                        Apellido = "Cárdenas",
+                        Email = "karla.cardenas@bakerhughes.com",
+                        UserName = "KarlaCardenas",
+                        Telefono = "0999999999",
                     };
-                    await userManager.CreateAsync(Maria, "MariaPetBow2024$");
-                    await userManager.AddToRoleAsync(Maria, Role.Juez);
-                    //juez
-                    var Christofer = new Usuario
+                    await userManager.CreateAsync(Karla, "KarlaCardenasPetBow2024$");
+                    await userManager.AddToRoleAsync(Karla, Role.Juez);
+
+                    var Hugo = new Usuario
                     {
-                        Nombre = "Christofer",
-                        Apellido = "Mayorga",
-                        Email = "christopher.mayorga@halliburton.com",
-                        UserName = "cmayorga97",
-                        Telefono = "0998358664",
+                        Nombre = "Hugo",
+                        Apellido = "Crespo",
+                        Email = "hugo.crespo@jebsen-jessen.com",
+                        UserName = "HugoCrespo",
+                        Telefono = "0999999999",
                     };
-                    await userManager.CreateAsync(Christofer, "ChristoferPetBow2024@");
-                    await userManager.AddToRoleAsync(Christofer, Role.Juez);
-                    //juez
-                    var Presidencia = new Usuario
+                    await userManager.CreateAsync(Hugo, "HugoCrespoPetBow2024$");
+                    await userManager.AddToRoleAsync(Hugo, Role.Juez);
+
+                    var Bridget = new Usuario
                     {
-                        Nombre = "Presidencia",
-                        Apellido = "Presidencia",
-                        Email = "presidencia@spe-ecuador.org",
-                        UserName = "Presidencia97",
-                        Telefono = "0998358664",
+                        Nombre = "Bridget",
+                        Apellido = "Lawrence",
+                        Email = "Bridget.Lawrence@Halliburton.com",
+                        UserName = "BridgetLawrence",
+                        Telefono = "0999999999",
                     };
-                    await userManager.CreateAsync(Presidencia, "PresidenciaPetBow2024@");
-                    await userManager.AddToRoleAsync(Presidencia, Role.Juez);
+                    await userManager.CreateAsync(Bridget, "BridgetLawrencePetBow2024$");
+                    await userManager.AddToRoleAsync(Bridget, Role.Juez);
+
 
 
                     /*var usuarioCompetidor = new Usuario
@@ -262,26 +216,26 @@ namespace Infraestructure.Persistence
 
                     var CapitanEPN = new Usuario
                     {
-                        Nombre = "Jesus",
-                        Apellido = "Leon",
-                        Email = "jesus.leon@epn.edu.ec",
+                        Nombre = "Alexis",
+                        Apellido = "Tasinchana",
+                        Email = "alexis.tasinchana@epn.edu.ec",
                         UserName = "CapitanEPN",
                         Telefono = "0999999999",
                         Equipo = 1
                     };
-                    await userManager.CreateAsync(CapitanEPN, "CapJesusEPNPetBow2024$");
+                    await userManager.CreateAsync(CapitanEPN, "CapAlexisEPNPetBow2024$");
                     await userManager.AddToRoleAsync(CapitanEPN, Role.Competidor);
 
                     var CapitanUCE = new Usuario
                     {
-                        Nombre = "Sebastian",
-                        Apellido = "Altamirano",
-                        Email = "saaltamirano@uce.edu.ec",
+                        Nombre = "Timothy",
+                        Apellido = "Molina",
+                        Email = "tmmolinae@uce.edu.ec",
                         UserName = "CapitanUCE",
                         Telefono = "0999999999",
                         Equipo = 4
                     };
-                    await userManager.CreateAsync(CapitanUCE, "CapSebastianUCEPetBow2024$");
+                    await userManager.CreateAsync(CapitanUCE, "CapTimothyUCEPetBow2024$");
                     await userManager.AddToRoleAsync(CapitanUCE, Role.Competidor);
 
                     /*var CapitanUPSE = new Usuario
@@ -298,26 +252,26 @@ namespace Infraestructure.Persistence
 
                     var CapitanESPOCH = new Usuario
                     {
-                        Nombre = "Yordan",
-                        Apellido = "Calero",
-                        Email = "yecalero2001@gmail.com",
+                        Nombre = "Natalia",
+                        Apellido = "Sanchez",
+                        Email = "natalia.ssnchez@espoch.edu.ec",
                         UserName = "CapitanESPOCH",
                         Telefono = "0999999999",
                         Equipo = 2
                     };
-                    await userManager.CreateAsync(CapitanESPOCH, "CapYordanESPOCHPetBow2024$");
+                    await userManager.CreateAsync(CapitanESPOCH, "CapNataliaESPOCHPetBow2024$");
                     await userManager.AddToRoleAsync(CapitanESPOCH, Role.Competidor);
 
                     var CapitanESPOL = new Usuario
                     {
-                        Nombre = "Miguel",
-                        Apellido = "Boza",
-                        Email = "angmboza@espol.edu.ec",
-                        UserName = "MiguelBoza",
+                        Nombre = "Diana",
+                        Apellido = "Franco",
+                        Email = "dmfranco@espol.edu.ec",
+                        UserName = "CapitanESPOL",
                         Telefono = "0999999999",
                         Equipo = 3
                     };
-                    await userManager.CreateAsync(CapitanESPOL, "CapBozaESPOLPetBow2024$");
+                    await userManager.CreateAsync(CapitanESPOL, "CapDianaESPOLPetBow2024$");
                     await userManager.AddToRoleAsync(CapitanESPOL, Role.Competidor);
                 }
 
@@ -500,12 +454,13 @@ namespace Infraestructure.Persistence
                 }
 
                 var competidoresEPN = new List<Usuario>
-{
-    new Usuario { Nombre = "Santiago", Apellido = "Benitez", Email = "sbenitez@epn.edu.ec", UserName = "sbenitez", Telefono = "0999999999", Equipo = 1, IsActive = true },
-    new Usuario { Nombre = "Fernanda", Apellido = "Yanez", Email = "fyanez@epn.edu.ec", UserName = "fyanez", Telefono = "0999999999", Equipo = 1, IsActive = true },
-    new Usuario { Nombre = "Miguel", Apellido = "Cordero", Email = "mcordero@epn.edu.ec", UserName = "mcordero", Telefono = "0999999999", Equipo = 1, IsActive = true },
-    new Usuario { Nombre = "Alejandro", Apellido = "Ponce", Email = "aponce@epn.edu.ec", UserName = "aponce", Telefono = "0999999999", Equipo = 1, IsActive = false } // 🔴 Reserva
-};
+                {
+                    new Usuario { Nombre = "Alex", Apellido = "Espinosa", Email = "alex.espinosa@epn.edu.ec", UserName = "alex.espinosa", Telefono = "0999999999", Equipo = 1, IsActive = true },
+                    new Usuario { Nombre = "Kimy", Apellido = "Benalcazar", Email = "kimy.benalcazar@epn.edu.ec", UserName = "kimy.benalcazar", Telefono = "0999999999", Equipo = 1, IsActive = true },
+                    new Usuario { Nombre = "Mayerli", Apellido = "Coral", Email = "mayerli.coral@epn.edu.ec", UserName = "mayerli.coral", Telefono = "0999999999", Equipo = 1, IsActive = true },
+                    new Usuario { Nombre = "Edgar", Apellido = "Romero", Email = "edgar.romero01@epn.edu.ec", UserName = "edgar.romero01", Telefono = "0999999999", Equipo = 1, IsActive = false } // 🔴 Reserva
+                };
+
 
                 foreach (var competidor in competidoresEPN)
                 {
@@ -541,12 +496,13 @@ namespace Infraestructure.Persistence
                 }
 
                 var competidoresESPOCH = new List<Usuario>
-{
-    new Usuario { Nombre = "Daniela", Apellido = "Castro", Email = "dcastro@espoch.edu.ec", UserName = "dcastro", Telefono = "0999999999", Equipo = 2, IsActive = true },
-    new Usuario { Nombre = "Javier", Apellido = "Torres", Email = "jtorres@espoch.edu.ec", UserName = "jtorres", Telefono = "0999999999", Equipo = 2, IsActive = true },
-    new Usuario { Nombre = "Paula", Apellido = "Jimenez", Email = "pjimenez@espoch.edu.ec", UserName = "pjimenez", Telefono = "0999999999", Equipo = 2, IsActive = true },
-    new Usuario { Nombre = "Andrea", Apellido = "Lopez", Email = "alopez@espoch.edu.ec", UserName = "alopez", Telefono = "0999999999", Equipo = 2, IsActive = false } // 🔴 Reserva
-};
+                {
+                    new Usuario { Nombre = "Erick", Apellido = "Hernández", Email = "manuel.hernandez@espoch.edu.ec", UserName = "manuel.hernandez", Telefono = "0999999999", Equipo = 2, IsActive = true },
+                    new Usuario { Nombre = "Johan", Apellido = "Freire", Email = "dardesfre@gmail.com", UserName = "dardesfre", Telefono = "0999999999", Equipo = 2, IsActive = true },
+                    new Usuario { Nombre = "Jonathan", Apellido = "Moyano", Email = "jonathan.moyano@espoch.edu.ec", UserName = "jonathan.moyano", Telefono = "0999999999", Equipo = 2, IsActive = true },
+                    new Usuario { Nombre = "Camila", Apellido = "Sánchez", Email = "alejandra.sanchez@espoch.edu.ec", UserName = "alejandra.sanchez", Telefono = "0999999999", Equipo = 2, IsActive = false } // 🔴 Reserva
+                };
+
 
                 foreach (var competidor in competidoresESPOCH)
                 {
@@ -583,10 +539,11 @@ namespace Infraestructure.Persistence
 
                 var competidoresESPOL = new List<Usuario>
                 {
-                    new Usuario { Nombre = "Luis", Apellido = "Torres", Email = "ltorres@espol.edu.ec", UserName = "ltorres", Telefono = "0999999999", Equipo = 3, IsActive = true },
-                    new Usuario { Nombre = "Carlos", Apellido = "Navarro", Email = "cnavarro@espol.edu.ec", UserName = "cnavarro", Telefono = "0999999999", Equipo = 3, IsActive = true },
+                    new Usuario { Nombre = "Jesus", Apellido = "Zambrano", Email = "jeenzamb@espol.edu.ec", UserName = "jeenzamb", Telefono = "0999999999", Equipo = 3, IsActive = true },
+                    new Usuario { Nombre = "Maria", Apellido = "Mora", Email = "mlmora@espol.edu.ec", UserName = "mlmora", Telefono = "0999999999", Equipo = 3, IsActive = true },
                     // 🔴 Reserva
                 };
+
 
                 foreach (var competidor in competidoresESPOL)
                 {
@@ -623,11 +580,12 @@ namespace Infraestructure.Persistence
 
                 var competidoresUCE = new List<Usuario>
                 {
-                    new Usuario { Nombre = "Marcos", Apellido = "Gonzalez", Email = "mgonzalez@uce.edu.ec", UserName = "mgonzalez", Telefono = "0999999999", Equipo = 4, IsActive = true },
-                    new Usuario { Nombre = "Isabel", Apellido = "Ramirez", Email = "iramirez@uce.edu.ec", UserName = "iramirez", Telefono = "0999999999", Equipo = 4, IsActive = true },
-                    new Usuario { Nombre = "Ricardo", Apellido = "Vera", Email = "rvera@uce.edu.ec", UserName = "rvera", Telefono = "0999999999", Equipo = 4, IsActive = true },
-                    new Usuario { Nombre = "Julian", Apellido = "Perez", Email = "jperez@uce.edu.ec", UserName = "jperez", Telefono = "0999999999", Equipo = 4, IsActive = false } // 🔴 Reserva
+                    new Usuario { Nombre = "Jonathan", Apellido = "Rosero", Email = "jaroseroc3@uce.edu.ec", UserName = "jaroseroc3", Telefono = "0999999999", Equipo = 4, IsActive = true },
+                    new Usuario { Nombre = "Cintya", Apellido = "Nuñez", Email = "cynunezb@uce.edu.ec", UserName = "cynunezb", Telefono = "0999999999", Equipo = 4, IsActive = true },
+                    new Usuario { Nombre = "Elizabeth", Apellido = "Potosí", Email = "eepotosi@uce.edu.ec", UserName = "eepotosi", Telefono = "0999999999", Equipo = 4, IsActive = true },
+                    new Usuario { Nombre = "Joao", Apellido = "Ugalde", Email = "jmugalde@uce.edu.ec", UserName = "jmugalde", Telefono = "0999999999", Equipo = 4, IsActive = false } // 🔴 Reserva
                 };
+
                 foreach (var competidor in competidoresUCE)
                 {
                     var usuarioExistente = await userManager.FindByEmailAsync(competidor.Email);
