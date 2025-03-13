@@ -39,7 +39,7 @@ namespace Infraestructure.Persistence
                         UserName = "shadowcoque",
                         Telefono = "0992620528",
                     };
-                    await userManager.CreateAsync(usuarioAdmin, "JoelPetBow2024$");
+                    await userManager.CreateAsync(usuarioAdmin, "JoelPetBow2025$");
                     await userManager.AddToRoleAsync(usuarioAdmin, Role.Admin);
 
                     var usuarioAdmin2 = new Usuario
@@ -50,7 +50,7 @@ namespace Infraestructure.Persistence
                         UserName = "ronalatiburona",
                         Telefono = "",
                     };
-                    await userManager.CreateAsync(usuarioAdmin2, "RonnyPetBow2024$");
+                    await userManager.CreateAsync(usuarioAdmin2, "RonnyPetBow2025$");
                     await userManager.AddToRoleAsync(usuarioAdmin2, Role.Admin);
 
                     var usuarioAdmin3 = new Usuario
@@ -61,7 +61,7 @@ namespace Infraestructure.Persistence
                         UserName = "mkjarrin",
                         Telefono = "",
                     };
-                    await userManager.CreateAsync(usuarioAdmin3, "MarioPetBow2024$");
+                    await userManager.CreateAsync(usuarioAdmin3, "MarioPetBow2025$");
                     await userManager.AddToRoleAsync(usuarioAdmin3, Role.Admin);
 
 
@@ -76,7 +76,7 @@ namespace Infraestructure.Persistence
                         UserName = "LeninPozo",
                         Telefono = "0999999999",
                     };
-                    await userManager.CreateAsync(Lenin, "LeninPozoPetBow2024$");
+                    await userManager.CreateAsync(Lenin, "LeninPozoPetBow2025$");
                     await userManager.AddToRoleAsync(Lenin, Role.Juez);
 
                     var Karla = new Usuario
@@ -87,7 +87,7 @@ namespace Infraestructure.Persistence
                         UserName = "KarlaCardenas",
                         Telefono = "0999999999",
                     };
-                    await userManager.CreateAsync(Karla, "KarlaCardenasPetBow2024$");
+                    await userManager.CreateAsync(Karla, "KarlaCardenasPetBow2025$");
                     await userManager.AddToRoleAsync(Karla, Role.Juez);
 
                     var Hugo = new Usuario
@@ -98,7 +98,7 @@ namespace Infraestructure.Persistence
                         UserName = "HugoCrespo",
                         Telefono = "0999999999",
                     };
-                    await userManager.CreateAsync(Hugo, "HugoCrespoPetBow2024$");
+                    await userManager.CreateAsync(Hugo, "HugoCrespoPetBow2025$");
                     await userManager.AddToRoleAsync(Hugo, Role.Juez);
 
                     var Bridget = new Usuario
@@ -109,9 +109,19 @@ namespace Infraestructure.Persistence
                         UserName = "BridgetLawrence",
                         Telefono = "0999999999",
                     };
-                    await userManager.CreateAsync(Bridget, "BridgetLawrencePetBow2024$");
+                    await userManager.CreateAsync(Bridget, "BridgetLawrencePetBow2025$");
                     await userManager.AddToRoleAsync(Bridget, Role.Juez);
 
+                    var JuezTest = new Usuario
+                    {
+                        Nombre = "Juez",
+                        Apellido = "Test",
+                        Email = "JuezTester@test.com",
+                        UserName = "Tester",
+                        Telefono = "",
+                    };
+                    await userManager.CreateAsync(JuezTest, "JuezTestPetBow2025$");
+                    await userManager.AddToRoleAsync(JuezTest, Role.Juez);
 
 
                     /*var usuarioCompetidor = new Usuario
@@ -123,7 +133,7 @@ namespace Infraestructure.Persistence
                         Telefono = "0998358664",
                         Equipo = 1
                     };
-                    await userManager.CreateAsync(usuarioCompetidor, "KevMinPetBow2024$");
+                    await userManager.CreateAsync(usuarioCompetidor, "KevMinPetBow2025$");
                     await userManager.AddToRoleAsync(usuarioCompetidor, Role.Competidor);*/
 
 
@@ -136,7 +146,7 @@ namespace Infraestructure.Persistence
                         UserName = "CristopherSaca",
                         Telefono = "0998358664",
                     };
-                    await userManager.CreateAsync(Cristopher, "CristopherSacaPetBow2024$");
+                    await userManager.CreateAsync(Cristopher, "CristopherSacaPetBow2025$");
                     await userManager.AddToRoleAsync(Cristopher, Role.Veedor);
 
                     //Veedores 2
@@ -148,7 +158,7 @@ namespace Infraestructure.Persistence
                         UserName = "PamelaGarcia",
                         Telefono = "0998358664",
                     };
-                    await userManager.CreateAsync(Pamela, "PamelaGarciaPetBow2024$");
+                    await userManager.CreateAsync(Pamela, "PamelaGarciaPetBow2025$");
                     await userManager.AddToRoleAsync(Pamela, Role.Veedor);
 
                     //Veedores 3
@@ -160,7 +170,7 @@ namespace Infraestructure.Persistence
                         UserName = "JuanSalinas",
                         Telefono = "0998358664",
                     };
-                    await userManager.CreateAsync(Juan, "JuanSalinasPetBow2024$");
+                    await userManager.CreateAsync(Juan, "JuanSalinasPetBow2025$");
                     await userManager.AddToRoleAsync(Juan, Role.Veedor);
 
                     //Veedores 4
@@ -172,7 +182,7 @@ namespace Infraestructure.Persistence
                         UserName = "KatherineCruz",
                         Telefono = "0998358664",
                     };
-                    await userManager.CreateAsync(Katherine, "KatherineCruzPetBow2024$");
+                    await userManager.CreateAsync(Katherine, "KatherineCruzPetBow2025$");
                     await userManager.AddToRoleAsync(Katherine, Role.Veedor);
 
                     //Veedores 5
@@ -184,7 +194,7 @@ namespace Infraestructure.Persistence
                         UserName = "CristinaFalconi",
                         Telefono = "0998358664",
                     };
-                    await userManager.CreateAsync(Cristina, "CristinaFalconiPetBow2024$");
+                    await userManager.CreateAsync(Cristina, "CristinaFalconiPetBow2025$");
                     await userManager.AddToRoleAsync(Cristina, Role.Veedor);
 
 
@@ -197,7 +207,7 @@ namespace Infraestructure.Persistence
                         UserName = "MaximoNastacuas",
                         Telefono = "0998358664",
                     };
-                    await userManager.CreateAsync(Maximo, "MaximoNastacuasPetBow2024$");
+                    await userManager.CreateAsync(Maximo, "MaximoNastacuasPetBow2025$");
                     await userManager.AddToRoleAsync(Maximo, Role.Veedor);
 
                     // Capitanes
@@ -211,7 +221,7 @@ namespace Infraestructure.Persistence
                         Telefono = "0999999999",
                         Equipo = 1
                     };
-                    await userManager.CreateAsync(CapitanESPE, "RonaldVillacisEspePetBow2024$");
+                    await userManager.CreateAsync(CapitanESPE, "RonaldVillacisEspePetBow2025$");
                     await userManager.AddToRoleAsync(CapitanESPE, Role.Competidor);*/
 
                     var CapitanEPN = new Usuario
@@ -223,7 +233,7 @@ namespace Infraestructure.Persistence
                         Telefono = "0999999999",
                         Equipo = 1
                     };
-                    await userManager.CreateAsync(CapitanEPN, "CapAlexisEPNPetBow2024$");
+                    await userManager.CreateAsync(CapitanEPN, "CapAlexisEPNPetBow2025$");
                     await userManager.AddToRoleAsync(CapitanEPN, Role.Competidor);
 
                     var CapitanUCE = new Usuario
@@ -235,7 +245,7 @@ namespace Infraestructure.Persistence
                         Telefono = "0999999999",
                         Equipo = 4
                     };
-                    await userManager.CreateAsync(CapitanUCE, "CapTimothyUCEPetBow2024$");
+                    await userManager.CreateAsync(CapitanUCE, "CapTimothyUCEPetBow2025$");
                     await userManager.AddToRoleAsync(CapitanUCE, Role.Competidor);
 
                     /*var CapitanUPSE = new Usuario
@@ -247,7 +257,7 @@ namespace Infraestructure.Persistence
                         Telefono = "0999999999",
                         Equipo = 6
                     };
-                    await userManager.CreateAsync(CapitanUPSE, "CapMirandaUPSEPetBow2024$");
+                    await userManager.CreateAsync(CapitanUPSE, "CapMirandaUPSEPetBow2025$");
                     await userManager.AddToRoleAsync(CapitanUPSE, Role.Competidor);*/
 
                     var CapitanESPOCH = new Usuario
@@ -259,7 +269,7 @@ namespace Infraestructure.Persistence
                         Telefono = "0999999999",
                         Equipo = 2
                     };
-                    await userManager.CreateAsync(CapitanESPOCH, "CapNataliaESPOCHPetBow2024$");
+                    await userManager.CreateAsync(CapitanESPOCH, "CapNataliaESPOCHPetBow2025$");
                     await userManager.AddToRoleAsync(CapitanESPOCH, Role.Competidor);
 
                     var CapitanESPOL = new Usuario
@@ -271,7 +281,7 @@ namespace Infraestructure.Persistence
                         Telefono = "0999999999",
                         Equipo = 3
                     };
-                    await userManager.CreateAsync(CapitanESPOL, "CapDianaESPOLPetBow2024$");
+                    await userManager.CreateAsync(CapitanESPOL, "CapDianaESPOLPetBow2025$");
                     await userManager.AddToRoleAsync(CapitanESPOL, Role.Competidor);
                 }
 
@@ -467,7 +477,7 @@ namespace Infraestructure.Persistence
                     var usuarioExistente = await userManager.FindByEmailAsync(competidor.Email);
                     if (usuarioExistente == null)
                     {
-                        var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2024$");
+                        var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2025$");
                         if (result.Succeeded)
                         {
                             Persona nuevaPersona = new Persona
@@ -509,7 +519,7 @@ namespace Infraestructure.Persistence
                     var usuarioExistente = await userManager.FindByEmailAsync(competidor.Email);
                     if (usuarioExistente == null)
                     {
-                        var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2024$");
+                        var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2025$");
                         if (result.Succeeded)
                         {
                             Persona nuevaPersona = new Persona
@@ -550,7 +560,7 @@ namespace Infraestructure.Persistence
                     var usuarioExistente = await userManager.FindByEmailAsync(competidor.Email);
                     if (usuarioExistente == null)
                     {
-                        var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2024$");
+                        var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2025$");
                         if (result.Succeeded)
                         {
                             Persona nuevaPersona = new Persona
@@ -591,7 +601,7 @@ namespace Infraestructure.Persistence
                     var usuarioExistente = await userManager.FindByEmailAsync(competidor.Email);
                     if (usuarioExistente == null)
                     {
-                        var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2024$");
+                        var result = await userManager.CreateAsync(competidor, $"{competidor.Nombre}2025$");
                         if (result.Succeeded)
                         {
                             Persona nuevaPersona = new Persona

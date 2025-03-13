@@ -29,7 +29,7 @@
 
         <div class="row mt-5">
             <div class="col d-flex align-items-center justify-content-center">
-               <h3>El sorteo va a tener como resultado dos grupos el A y el B</h3>
+               <h3>El sorteo va a tener como resultado dos equipos por cada auditorio</h3>
             </div>
         </div>
         <div class="row mt-5">
@@ -60,7 +60,7 @@
             <div class="col d-flex justify-content-center">
                 <div>
                     <ul class="list-group">
-                        <li class="list-group-item disabled text-center"><h2>Grupo A</h2></li>
+                        <li class="list-group-item disabled text-center"><h2>Auditorio 1</h2></li>
                         @foreach (var equipo in ViewBag.GrupoA)
                         {
                             <li class="list-group-item text-center"><img src="~/media/logo@(equipo.Nombre).png" alt="Logo SPE" style="@(equipo.Nombre == "ESPOL" ? "width: 150px;" : "width: 50px;");" /></li>
@@ -72,7 +72,7 @@
             <div class="col d-flex justify-content-center">
                 <div>
                     <ul class="list-group">
-                        <li class="list-group-item disabled text-center"><h2>Grupo B</h2></li>
+                        <li class="list-group-item disabled text-center"><h2>Auditorio 2</h2></li>
 
                         @foreach (var equipo in ViewBag.GrupoB)
                         {
