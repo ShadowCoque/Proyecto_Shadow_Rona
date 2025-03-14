@@ -123,6 +123,17 @@ namespace Infraestructure.Persistence
                     await userManager.CreateAsync(JuezTest, "JuezTestPetBow2025$");
                     await userManager.AddToRoleAsync(JuezTest, Role.Juez);
 
+                    var JuezTest2 = new Usuario
+                    {
+                        Nombre = "Juez",
+                        Apellido = "Test2",
+                        Email = "JuezTester2@test.com",
+                        UserName = "Tester2",
+                        Telefono = "",
+                    };
+                    await userManager.CreateAsync(JuezTest2, "JuezTest2PetBow2025$");
+                    await userManager.AddToRoleAsync(JuezTest2, Role.Juez);
+
 
                     /*var usuarioCompetidor = new Usuario
                     {
