@@ -333,19 +333,13 @@ namespace Infraestructure.Persistence
 
                     if (!File.Exists(filePath))
                     {
-                        Console.WriteLine("❌ No se encontró el archivo preguntas.csv");
-                        return; // Salimos si no existe el archivo
+                        Console.WriteLine("⚠️ No se encontró el archivo preguntas.csv. Se continuará con la carga de datos.");
                     }
                     else
                     {
                         Console.WriteLine("✅ Archivo encontrado. Procediendo a leer...");
-                    }
 
-
-                    if (File.Exists(filePath))
-                    {
                         var preguntasAInsertar = new List<Pregunta>();
-                        var respuestasAInsertar = new List<Respuesta>();
 
                         using (var reader = new StreamReader(filePath))
                         {
@@ -356,10 +350,9 @@ namespace Infraestructure.Persistence
 
                                 if (values.Length >= 2)
                                 {
-                                    string preguntaTexto = values[0].Trim().Trim('"'); // Elimina espacios y comillas
+                                    string preguntaTexto = values[0].Trim().Trim('"');
                                     string respuestaTexto = values[1].Trim().Trim('"');
 
-                                    // Crear la pregunta
                                     var pregunta = new Pregunta
                                     {
                                         Descripcion = preguntaTexto,
@@ -374,49 +367,12 @@ namespace Infraestructure.Persistence
                             }
                         }
 
-                        // Insertamos todas las preguntas en un solo paso
                         await context.Preguntas.AddRangeAsync(preguntasAInsertar);
                         await context.SaveChangesAsync();
-
-                        // Ahora insertamos las respuestas vinculadas a las preguntas
-                        foreach (var pregunta in preguntasAInsertar)
-                        {
-                            var respuestaTexto = File.ReadLines(filePath)
-                                .Select(line => line.Split(";"))
-                                .Where(values => values.Length >= 2 && values[0].Trim().Trim('"') == pregunta.Descripcion)
-                                .Select(values => values[1].Trim().Trim('"'))
-                                .FirstOrDefault();
-
-                            if (!string.IsNullOrEmpty(respuestaTexto))
-                            {
-                                var respuesta = new Respuesta
-                                {
-                                    Descripcion = respuestaTexto,
-                                    Correcta = true, // Ajustar si hay múltiples respuestas
-                                    PreguntaId = pregunta.id,
-                                    CreatedBy = "Admin",
-                                    CreatedDate = DateTime.Now
-                                };
-
-                                respuestasAInsertar.Add(respuesta);
-                            }
-                        }
-
-                        // Insertamos todas las respuestas en un solo paso
-                        await context.Respuestas.AddRangeAsync(respuestasAInsertar);
-                        await context.SaveChangesAsync();
-
-                        Console.WriteLine($"✅ Se han insertado {preguntasAInsertar.Count} preguntas y respuestas correctamente desde el CSV.");
                     }
-                    else
-                    {
-                        Console.WriteLine("❌ No se encontró el archivo 'preguntas.csv'.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("❌ No se encontró el banco de preguntas 'Marzo-2025'.");
-                }
+
+                    // ✅ Aquí nos aseguramos de que el código sigue con la inserción de equipos
+                    Console.WriteLine("➡️ Continuando con la carga de equipos...");
 
 
 
@@ -424,9 +380,10 @@ namespace Infraestructure.Persistence
 
 
 
-                // Insertar EQUIPOS
 
-                if (!context.Equipos.Any())
+                    // Insertar EQUIPOS
+
+                    if (!context.Equipos.Any())
                 {
                     var EPN = new Equipo
                     {
@@ -631,6 +588,7 @@ namespace Infraestructure.Persistence
 
 
 
+            }
             }
             catch (Exception ex)
             {
