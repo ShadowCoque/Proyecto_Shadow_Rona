@@ -36,10 +36,25 @@ namespace petrotest.Controllers
             return View();
         }
 
+
+        public IActionResult SeleccionarVersus_Auditorio1()
+        {
+            return View();
+        }
+
+        public IActionResult Versus_Auditorio1(string equipo1, string equipo2)
+        {
+            ViewBag.Equipo1 = equipo1;
+            ViewBag.Equipo2 = equipo2;
+            return View();
+        }
+
         public IActionResult Equipos()
         {
             return View();
         }
+
+
         public async Task<IActionResult> Usuarios()
         {
 

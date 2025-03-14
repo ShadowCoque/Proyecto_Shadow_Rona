@@ -1,0 +1,165 @@
+﻿@{
+    ViewData["Title"] = "Seleccionar Versus - Auditorio 1";
+}
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+
+<!-- Contenedor Principal -->
+<div class="container text-center mt-5">
+    <h1 class="title">🔹 SELECCIONA LOS EQUIPOS 🔹</h1>
+
+    <!-- Primera fila de equipos -->
+    <div class="team-selection-row">
+        <div id="team1">
+            <img src="~/media/logoEPN.png" class="team-logo" onclick="selectTeam(1, 'EPN')">
+            <img src="~/media/espol_logo.png" class="team-logo" onclick="selectTeam(1, 'ESPOL')">
+            <img src="~/media/logoESPOCH.png" class="team-logo" onclick="selectTeam(1, 'ESPOCH')">
+            <img src="~/media/logoUCE.png" class="team-logo" onclick="selectTeam(1, 'UCE')">
+        </div>
+    </div>
+
+    <!-- VS animado -->
+    <h1 class="versus-text">VS</h1>
+
+    <!-- Segunda fila de equipos -->
+    <div class="team-selection-row">
+        <div id="team2">
+            <img src="~/media/logoEPN.png" class="team-logo" onclick="selectTeam(2, 'EPN')">
+            <img src="~/media/espol_logo.png" class="team-logo" onclick="selectTeam(2, 'ESPOL')">
+            <img src="~/media/logoESPOCH.png" class="team-logo" onclick="selectTeam(2, 'ESPOCH')">
+            <img src="~/media/logoUCE.png" class="team-logo" onclick="selectTeam(2, 'UCE')">
+        </div>
+    </div>
+
+    <!-- Botón Iniciar -->
+    <button class="btn start-btn mt-4" onclick="iniciarVersus()">🔥 Iniciar Versus 🔥</button>
+</div>
+
+<!-- 🎨 ESTILOS MEJORADOS -->
+<style>
+    /* Fondo elegante con degradado */
+    body {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: white;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Título con efecto futurista */
+    .title {
+        font-size: 3rem;
+        font-weight: bold;
+        font-family: 'Orbitron', sans-serif;
+        text-transform: uppercase;
+        text-shadow: 0 0 20px rgba(0, 212, 255, 0.9);
+        margin-bottom: 30px;
+    }
+
+    /* Contenedor de equipos */
+    .team-selection-row {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 20px;
+    }
+
+    /* Logos con efecto hover y selección */
+    .team-logo {
+        width: 130px;
+        height: 130px;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s ease-in-out;
+        border-radius: 15px;
+        background: linear-gradient(135deg, #1e293b, #334155);
+        border: 4px solid transparent;
+        padding: 12px;
+        
+    }
+
+        .team-logo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+        }
+
+    .selected {
+        border: 4px solid cyan;
+        transform: scale(1.15);
+        box-shadow: 0 0 30px rgba(0, 212, 255, 1);
+    }
+
+    /* VS con animación de luz */
+    .versus-text {
+        font-size: 4rem;
+        font-weight: bold;
+        color: #ff4d4d;
+        text-shadow: 0 0 15px rgba(255, 77, 77, 1);
+        animation: glowVs 1s infinite alternate;
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    @@keyframes glowVs {
+        from
+
+    {
+        text-shadow: 0 0 10px rgba(255, 77, 77, 0.7);
+    }
+
+    to {
+        text-shadow: 0 0 25px rgba(255, 77, 77, 1);
+    }
+
+    }
+
+    /* Botón de inicio con efecto 3D */
+    .start-btn {
+        font-size: 2rem;
+        padding: 12px 30px;
+        border-radius: 50px;
+        background: linear-gradient(90deg, #ff4d4d, #ff8800);
+        border: none;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 0 20px rgba(255, 77, 77, 0.7);
+        animation: pulseBtn 1.5s infinite alternate;
+    }
+
+        .start-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 35px rgba(255, 77, 77, 1);
+        }
+
+    @@keyframes pulseBtn {
+        from
+
+    {
+        box-shadow: 0 0 20px rgba(255, 77, 77, 0.7);
+    }
+
+    to {
+        box-shadow: 0 0 40px rgba(255, 77, 77, 1);
+    }
+
+    }
+</style>
+
+<!-- 🧠 SCRIPT SELECCIÓN -->
+<script>
+    let selectedTeams = { 1: null, 2: null };
+
+    function selectTeam(player, team) {
+        document.querySelectorAll(`#team${player} img`).forEach(img => img.classList.remove("selected"));
+        event.target.classList.add("selected");
+        selectedTeams[player] = team;
+    }
+
+    function iniciarVersus() {
+        if (!selectedTeams[1] || !selectedTeams[2]) {
+            alert("Selecciona ambos equipos.");
+            return;
+        }
+        window.location.href = `/Juez/Versus_Auditorio1?equipo1=${selectedTeams[1]}&equipo2=${selectedTeams[2]}`;
+    }
+</script>

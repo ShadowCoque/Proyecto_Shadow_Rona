@@ -1,0 +1,199 @@
+﻿@{
+    ViewData["Title"] = "Versus - Auditorio 1";
+    var equipo1 = Context.Request.Query["equipo1"];
+    var equipo2 = Context.Request.Query["equipo2"];
+}
+
+<!-- Bootstrap y Fuentes -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Contenedor Principal -->
+<div class="container d-flex flex-column align-items-center justify-content-center vh-100 text-center">
+    <div class="row justify-content-center">
+        <!-- Equipo 1 -->
+        <div class="col-md-5 mb-4">
+            <div class="card team-card shadow-lg">
+                <img src="~/media/logo@(equipo1).png" class="card-img-top img-fluid p-4" alt="@equipo1">
+                <div class="card-body">
+                    <h1 class="team-name">@equipo1</h1>
+                    <div class="d-flex justify-content-center align-items-center gap-4">
+                        <button class="btn btn-success btn-lg px-4" onclick="addScore(1, 10)">+10</button>
+                        <span id="score1" class="display-1 fw-bold score-text">0</span>
+                        <button class="btn btn-danger btn-lg px-4" onclick="addScore(1, -5)">-5</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VS -->
+        <div class="col-md-2 d-flex align-items-center justify-content-center mb-4">
+            <h1 class="display-2 text-danger fw-bold vs-text">VS</h1>
+        </div>
+
+        <!-- Equipo 2 -->
+        <div class="col-md-5 mb-4">
+            <div class="card team-card shadow-lg">
+                <img src="~/media/logo@(equipo2).png" class="card-img-top img-fluid p-4" alt="@equipo2">
+                <div class="card-body">
+                    <h1 class="team-name">@equipo2</h1>
+                    <div class="d-flex justify-content-center align-items-center gap-4">
+                        <button class="btn btn-success btn-lg px-4" onclick="addScore(2, 10)">+10</button>
+                        <span id="score2" class="display-1 fw-bold score-text">0</span>
+                        <button class="btn btn-danger btn-lg px-4" onclick="addScore(2, -5)">-5</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Marcador -->
+    <div class="my-4">
+        <h1 id="totalScore" class="display-1 fw-bold text-glow">0 : 0</h1>
+    </div>
+
+    <!-- Temporizador -->
+    <div class="my-4 d-flex flex-column align-items-center">
+        <div class="circle d-flex align-items-center justify-content-center">
+            <h1 id="countdown" class="display-3">5</h1>
+        </div>
+        <button class="btn btn-warning btn-lg mt-3" onclick="resetTimer()">Reiniciar</button>
+    </div>
+
+    <!-- Botón para volver -->
+    <div class="mt-4">
+        <a href="/Juez/SeleccionarVersus_Auditorio1" class="btn btn-secondary btn-lg">Volver</a>
+    </div>
+</div>
+
+<!-- 🎨 ESTILOS MEJORADOS -->
+<style>
+    body {
+        background: #0a192f;
+        color: white;
+        font-family: 'Barlow', sans-serif;
+    }
+
+    /* Tarjetas con Glassmorphism */
+    .team-card {
+        background: rgba(30, 60, 114, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+    }
+
+    /* VS animado */
+    .vs-text {
+        text-shadow: 0 0 15px rgba(255, 77, 77, 1);
+        animation: glowVs 1s infinite alternate;
+    }
+
+    @@keyframes glowVs {
+        from {
+            text-shadow: 0 0 10px rgba(255, 77, 77, 0.7);
+        }
+
+        to {
+            text-shadow: 0 0 25px rgba(255, 77, 77, 1);
+        }
+    }
+
+    /* Círculo Temporizador */
+    .circle {
+        width: 250px;
+        height: 250px;
+        background: #ff3b3b;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    /* Efecto de sacudida cuando se acaba el tiempo */
+    .shake {
+        animation: shake 0.3s linear infinite;
+    }
+
+    @@keyframes shake {
+        0% {
+            transform: translate(0px, 0px);
+        }
+
+        25% {
+            transform: translate(-5px, 0px);
+        }
+
+        50% {
+            transform: translate(5px, 0px);
+        }
+
+        75% {
+            transform: translate(-5px, 0px);
+        }
+
+        100% {
+            transform: translate(5px, 0px);
+        }
+    }
+
+    /* Puntajes animados */
+    .score-text {
+        font-size: 4rem;
+        color: #00d4ff;
+        font-family: 'Orbitron', sans-serif;
+        text-shadow: 0 0 15px rgba(0, 212, 255, 1);
+        transition: all 0.3s ease-in-out;
+    }
+</style>
+
+<!-- 🧠 SCRIPT FUNCIONAL -->
+<!-- Agregamos el sonido en la raíz del proyecto -->
+<audio id="timeoutSound" src="/audio/timer-end.mp3"></audio>
+
+
+<script>
+    let timer;
+    let scores = { 1: 0, 2: 0 };
+
+    function startTimer() {
+        let time = 5;
+        const countdown = document.getElementById("countdown");
+        const circle = document.querySelector(".circle");
+        const sound = document.getElementById("timeoutSound");
+
+        circle.classList.remove("shake"); // Asegura que no tenga la clase al reiniciar
+        countdown.innerText = time;
+
+        timer = setInterval(() => {
+            time--;
+            countdown.innerText = time;
+
+            if (time <= 0) {
+                clearInterval(timer);
+                countdown.innerText = "Time Out";
+                circle.classList.add("shake"); // Activa la sacudida
+                sound.play();
+            }
+        }, 1000);
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        document.querySelector(".circle").classList.remove("shake");
+        startTimer();
+    }
+
+    function addScore(team, points) {
+        scores[team] += points;
+        document.getElementById(`score${team}`).innerText = scores[team];
+
+        // Animación de rebote al cambiar puntaje
+        const scoreElement = document.getElementById(`score${team}`);
+        scoreElement.style.transform = "scale(1.2)";
+        setTimeout(() => scoreElement.style.transform = "scale(1)", 200);
+
+        document.getElementById("totalScore").innerText = `${scores[1]}  :  ${scores[2]}`;
+    }
+
+    document.addEventListener("DOMContentLoaded", startTimer);
+</script>

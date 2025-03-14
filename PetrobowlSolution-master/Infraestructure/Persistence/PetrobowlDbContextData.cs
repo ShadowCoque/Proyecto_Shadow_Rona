@@ -73,7 +73,7 @@ namespace Infraestructure.Persistence
                         Nombre = "Lenin",
                         Apellido = "Pozo",
                         Email = "Lenin.Pozo@novometgroup.com",
-                        UserName = "LeninPozo",
+                        UserName = "LPozo",
                         Telefono = "0999999999",
                     };
                     await userManager.CreateAsync(Lenin, "LeninPozoPetBow2025$");
@@ -84,7 +84,7 @@ namespace Infraestructure.Persistence
                         Nombre = "Karla",
                         Apellido = "Cárdenas",
                         Email = "karla.cardenas@bakerhughes.com",
-                        UserName = "KarlaCardenas",
+                        UserName = "KCardenas",
                         Telefono = "0999999999",
                     };
                     await userManager.CreateAsync(Karla, "KarlaCardenasPetBow2025$");
@@ -95,7 +95,7 @@ namespace Infraestructure.Persistence
                         Nombre = "Hugo",
                         Apellido = "Crespo",
                         Email = "hugo.crespo@jebsen-jessen.com",
-                        UserName = "HugoCrespo",
+                        UserName = "HCrespo",
                         Telefono = "0999999999",
                     };
                     await userManager.CreateAsync(Hugo, "HugoCrespoPetBow2025$");
@@ -106,7 +106,7 @@ namespace Infraestructure.Persistence
                         Nombre = "Bridget",
                         Apellido = "Lawrence",
                         Email = "Bridget.Lawrence@Halliburton.com",
-                        UserName = "BridgetLawrence",
+                        UserName = "BLawrence",
                         Telefono = "0999999999",
                     };
                     await userManager.CreateAsync(Bridget, "BridgetLawrencePetBow2025$");
@@ -309,110 +309,105 @@ namespace Infraestructure.Persistence
                     await context.SaveChangesAsync();
                 }
 
-
-                /* Insertar una Pregunta y su Respuesta
-                if (!context.Preguntas.Any())
-                {
-                    var bancoPregunta = await context.BancoPreguntas
-                        .FirstOrDefaultAsync(x => x.Periodo == "Marzo-2025");
-
-                    if (bancoPregunta != null)
-                    {
-                        var pregunta = new Pregunta
-                        {
-                            Descripcion = "¿Cuál es la capital de Francia?",
-                            BancoPreguntaId = bancoPregunta.id,
-                            Status = PreguntaStatus.Activa,
-                            CreatedBy = "Admin",
-                            CreatedDate = DateTime.Now
-                        };
-
-                        await context.Preguntas.AddAsync(pregunta);
-                        await context.SaveChangesAsync();
-
-                        var preguntaInsertada = await context.Preguntas
-                            .FirstOrDefaultAsync(p => p.Descripcion == "¿Cuál es la capital de Francia?");
-
-                        if (preguntaInsertada != null)
-                        {
-                            var respuesta = new Respuesta
-                            {
-                                Descripcion = "París",
-                                Correcta = true,
-                                PreguntaId = preguntaInsertada.id,
-                                CreatedBy = "Admin",
-                                CreatedDate = DateTime.Now
-                            };
-
-                            await context.Respuestas.AddAsync(respuesta);
-                            await context.SaveChangesAsync();
-                        }
-                    }
-                }*/
-
-                // Asegúrate de que el banco de preguntas existe
+                // Asegurarse de que el banco de preguntas existe
                 var bancoPregunta = await context.BancoPreguntas
                     .FirstOrDefaultAsync(x => x.Periodo == "Marzo-2025");
 
                 if (bancoPregunta != null)
                 {
-                    // Lista de preguntas y respuestas (Aquí debes poner tus preguntas)
-                    var listaPreguntas = new List<(string Pregunta, string Respuesta)>
+                    // Ruta del archivo CSV (ajusta la ruta si es necesario)
+                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Resources", "preguntas.csv");
+
+                    Console.WriteLine($"🔍 Buscando archivo en: {filePath}");
+
+                    if (!File.Exists(filePath))
                     {
-                        ("¿Cuál es la capital de Francia?", "París"),
-                        ("¿Cuántos continentes hay en el mundo?", "7"),
-                        ("¿Quién escribió 'Cien años de soledad'?", "Gabriel García Márquez"),
-                        ("¿En qué año llegó el hombre a la Luna?", "1969"),
-                        ("¿Cuál es el planeta más grande del sistema solar?", "Júpiter"),
-                        // Agrega aquí más preguntas hasta llegar a las 200
-                    };
-
-                    var preguntasAInsertar = new List<Pregunta>();
-                    var respuestasAInsertar = new List<Respuesta>();
-
-                    foreach (var (preguntaTexto, respuestaTexto) in listaPreguntas)
+                        Console.WriteLine("❌ No se encontró el archivo preguntas.csv");
+                        return; // Salimos si no existe el archivo
+                    }
+                    else
                     {
-                        var pregunta = new Pregunta
-                        {
-                            Descripcion = preguntaTexto,
-                            BancoPreguntaId = bancoPregunta.id,
-                            Status = PreguntaStatus.Activa,
-                            CreatedBy = "Admin",
-                            CreatedDate = DateTime.Now
-                        };
-
-                        preguntasAInsertar.Add(pregunta);
+                        Console.WriteLine("✅ Archivo encontrado. Procediendo a leer...");
                     }
 
-                    // Insertamos todas las preguntas en un solo paso
-                    await context.Preguntas.AddRangeAsync(preguntasAInsertar);
-                    await context.SaveChangesAsync();
 
-                    // Ahora insertamos las respuestas vinculadas a las preguntas
-                    foreach (var pregunta in preguntasAInsertar)
+                    if (File.Exists(filePath))
                     {
-                        var respuesta = new Respuesta
+                        var preguntasAInsertar = new List<Pregunta>();
+                        var respuestasAInsertar = new List<Respuesta>();
+
+                        using (var reader = new StreamReader(filePath))
                         {
-                            Descripcion = listaPreguntas.First(p => p.Pregunta == pregunta.Descripcion).Respuesta,
-                            Correcta = true, // Ajustar si hay múltiples respuestas
-                            PreguntaId = pregunta.id,
-                            CreatedBy = "Admin",
-                            CreatedDate = DateTime.Now
-                        };
+                            while (!reader.EndOfStream)
+                            {
+                                var line = reader.ReadLine();
+                                var values = line.Split(";");
 
-                        respuestasAInsertar.Add(respuesta);
+                                if (values.Length >= 2)
+                                {
+                                    string preguntaTexto = values[0].Trim().Trim('"'); // Elimina espacios y comillas
+                                    string respuestaTexto = values[1].Trim().Trim('"');
+
+                                    // Crear la pregunta
+                                    var pregunta = new Pregunta
+                                    {
+                                        Descripcion = preguntaTexto,
+                                        BancoPreguntaId = bancoPregunta.id,
+                                        Status = PreguntaStatus.Activa,
+                                        CreatedBy = "Admin",
+                                        CreatedDate = DateTime.Now
+                                    };
+
+                                    preguntasAInsertar.Add(pregunta);
+                                }
+                            }
+                        }
+
+                        // Insertamos todas las preguntas en un solo paso
+                        await context.Preguntas.AddRangeAsync(preguntasAInsertar);
+                        await context.SaveChangesAsync();
+
+                        // Ahora insertamos las respuestas vinculadas a las preguntas
+                        foreach (var pregunta in preguntasAInsertar)
+                        {
+                            var respuestaTexto = File.ReadLines(filePath)
+                                .Select(line => line.Split(";"))
+                                .Where(values => values.Length >= 2 && values[0].Trim().Trim('"') == pregunta.Descripcion)
+                                .Select(values => values[1].Trim().Trim('"'))
+                                .FirstOrDefault();
+
+                            if (!string.IsNullOrEmpty(respuestaTexto))
+                            {
+                                var respuesta = new Respuesta
+                                {
+                                    Descripcion = respuestaTexto,
+                                    Correcta = true, // Ajustar si hay múltiples respuestas
+                                    PreguntaId = pregunta.id,
+                                    CreatedBy = "Admin",
+                                    CreatedDate = DateTime.Now
+                                };
+
+                                respuestasAInsertar.Add(respuesta);
+                            }
+                        }
+
+                        // Insertamos todas las respuestas en un solo paso
+                        await context.Respuestas.AddRangeAsync(respuestasAInsertar);
+                        await context.SaveChangesAsync();
+
+                        Console.WriteLine($"✅ Se han insertado {preguntasAInsertar.Count} preguntas y respuestas correctamente desde el CSV.");
                     }
-
-                    // Insertamos todas las respuestas en un solo paso
-                    await context.Respuestas.AddRangeAsync(respuestasAInsertar);
-                    await context.SaveChangesAsync();
-
-                    Console.WriteLine($"✅ Se han insertado {preguntasAInsertar.Count} preguntas y respuestas correctamente.");
+                    else
+                    {
+                        Console.WriteLine("❌ No se encontró el archivo 'preguntas.csv'.");
+                    }
                 }
                 else
                 {
                     Console.WriteLine("❌ No se encontró el banco de preguntas 'Marzo-2025'.");
                 }
+
+
 
 
 
